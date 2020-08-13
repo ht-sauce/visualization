@@ -49,7 +49,7 @@ export default defineComponent({
       list.splice(index, 1, startLi) // 放过去
       list.splice(startIndex, 1, endLi) // 反过来
     }
-
+    // 动态组件测试
     const dom = ref(-1).value
     console.log(dom)
 
