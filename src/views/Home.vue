@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive, getCurrentInstance } from 'vue'
 import DhtDrag from '@/components/Drag/index.vue'
 import DhtTest from '@/components/Test/index.vue'
 export default defineComponent({
@@ -28,10 +28,11 @@ export default defineComponent({
     DhtTest,
   },
   mounted(): void {
-    console.log(this.http)
+    console.log(333, this.http)
   },
   setup(props, ctx) {
-    console.log({ ...ctx })
+    const content = getCurrentInstance()
+    console.log(222, content.http)
 
     const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).value
     const setArr = (): void => {

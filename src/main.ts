@@ -8,6 +8,10 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     http: number
   }
+  interface ComponentInternalInstance {
+    ctx: object
+    http: number
+  }
 }
 
 const app = createApp(App)
