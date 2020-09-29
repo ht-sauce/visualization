@@ -6,9 +6,24 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue'
+import Ajax from '@/sdk/ajax'
+export default defineComponent({
   name: '',
-}
+  setup() {
+    const ajax = new Ajax()
+    interface Ceshi {
+      ceshi: string
+      dht: number
+    }
+    ajax.image({
+      data: {
+        ceshi: '11111',
+        dht: 12321,
+      } as Ceshi,
+    })
+  },
+})
 </script>
 
 <style scoped lang="scss">
