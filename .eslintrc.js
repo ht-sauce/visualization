@@ -20,5 +20,6 @@ module.exports = {
     'vue/no-unused-components': 'off', // 关闭不允许导入未使用的组件
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="test">
-    <div class="ceshi"></div>
-    <div>fsdafsasasasasasasasasasasasasasa</div>
+    <button @click="one">正常测试</button>
+    <button @click="timeout">延迟测试</button>
   </div>
 </template>
 
@@ -16,12 +16,41 @@ export default defineComponent({
       ceshi: string
       dht: number
     }
-    ajax.image({
-      data: {
-        ceshi: '11111',
-        dht: 12321,
-      } as Ceshi,
-    })
+    const one = () => {
+      ajax
+        .request({
+          url: '/test/one',
+          data: {
+            ceshi: '11111',
+            dht: 12321,
+          } as Ceshi,
+        })
+        .then(e => {
+          console.log(e)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+    const timeout = () => {
+      ajax
+        .request({
+          url: '/test/timeout',
+          timeout: 1000 * 10,
+          data: {
+            ceshi: '11111',
+            dht: 12321,
+          } as Ceshi,
+        })
+        .then(e => {
+          console.log(e)
+        })
+        .catch()
+    }
+    return {
+      one,
+      timeout,
+    }
   },
 })
 </script>
@@ -34,6 +63,19 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  > button {
+    margin: 20px;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    background: #ff958a;
+    color: #fff;
+    text-align: center;
+    border: none;
+    &:hover {
+      background: darkorange;
+    }
+  }
 }
 .ceshi {
   position: absolute;
