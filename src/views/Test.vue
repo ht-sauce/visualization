@@ -1,28 +1,33 @@
 <template>
   <div class="test">
     <button @click="one">正常测试</button>
-    <button @click="timeout">延迟测试</button>
+    <div>{{ api }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Ajax from '@/sdk/ajax'
 export default defineComponent({
   name: '',
   setup() {
     const ajax = new Ajax()
     interface Ceshi {
-      ceshi: string
-      dht: number
+      appid: string
+      secret: string
+      js_code: string
+      grant_type: string
     }
     const one = () => {
       ajax
         .request({
-          url: '/test/one',
+          url: '/sns/jscode2session',
+          prefix: 'https://api.weixin.qq.com',
           data: {
-            ceshi: '11111',
-            dht: 12321,
+            appid: 'wx5918c20ef3c671c4',
+            secret: '1b17e49cf31366d12d08680826701e00',
+            js_code: '081xypFa1uVBRz0WUoGa1Yd9zF4xypFb',
+            grant_type: 'authorization_code',
           } as Ceshi,
         })
         .then(e => {
@@ -32,24 +37,13 @@ export default defineComponent({
           console.log(e)
         })
     }
-    const timeout = () => {
-      ajax
-        .request({
-          url: '/test/timeout',
-          timeout: 1000 * 10,
-          data: {
-            ceshi: '11111',
-            dht: 12321,
-          } as Ceshi,
-        })
-        .then(e => {
-          console.log(e)
-        })
-        .catch()
-    }
+    const js_code = '041CC30w3aHbcV2R0Q0w3p8wxo4CC30-'
+    const api = ref(
+      `https://api.weixin.qq.com/sns/jscode2session?appid=wx5918c20ef3c671c4&secret=1b17e49cf31366d12d08680826701e00&js_code=${js_code}&grant_type=authorization_code`,
+    ).value
     return {
+      api,
       one,
-      timeout,
     }
   },
 })
@@ -61,6 +55,7 @@ export default defineComponent({
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   > button {

@@ -6,6 +6,11 @@ const vueConfig = {
         //ws: true,
         changeOrigin: true,
       },
+      '/sns': {
+        target: 'https://api.weixin.qq.com',
+        //ws: true,
+        changeOrigin: true,
+      },
     },
   },
 }
