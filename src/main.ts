@@ -1,25 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from "vue";
+import App from "./App.vue";
+import "./registerServiceWorker";
+import router from "./router";
 
-// 解决ts下全局变量定义问题
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    http: number
-  }
-  interface ComponentInternalInstance {
-    ctx: object
-    http: number
-  }
-}
-
-const app = createApp(App)
-
-app.config.globalProperties.http = '11111'
-
-app.provide('useStore', store)
-app
-  .use(store)
+createApp(App)
   .use(router)
-  .mount('#app')
+  .mount("#app");
