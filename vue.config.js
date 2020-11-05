@@ -13,6 +13,14 @@ const vueConfig = {
       },
     },
   },
+  css: {
+    requireModuleExtension: false,
+    loaderOptions: {
+      scss: {
+        prependData: `@import '~@/styles/variables.scss';`,
+      },
+    },
+  },
 }
 
 module.exports = vueConfig

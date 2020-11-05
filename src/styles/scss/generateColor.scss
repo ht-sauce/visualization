@@ -1,0 +1,176 @@
+// 抄的代码，来源：https://github.com/100cm/at-ui-angular/tree/master/src/assets/sass
+// 原理基于antd的色板系统
+$hueStep: 2;
+$saturationStep: 16; // 饱和度阶梯，浅色部分
+$saturationStep2: 5; // 饱和度阶梯，深色部分
+$brightnessStep1: 5; // 亮度阶梯，浅色部分
+$brightnessStep2: 15; // 亮度阶梯，深色部分
+$lightColorCount: 5; // 浅色数量，主色上
+$darkColorCount: 4; // 深色数量，主色下
+/*
+$color: 颜色
+$level：颜色加深层级
+$light：是否亮色掉，否则混合黑色，转暗色调
+*/
+@function generateColor($color,$level,$light) {
+
+  $hsv: ch-color-to-hsv($color);
+
+  $v: nth($hsv, 3);
+  $s: nth($hsv, 2);
+  $h: nth($hsv, 1);
+
+  //@debug $h, $s, $v ;
+
+  $adjustHue: round(getHue($h, $s, $v, $level, $light));
+  $adjustSaturation: getSaturation($h, $s, $v, $level, $light);
+  $adjustLight: getValue($h, $s, $v, $level, $light);
+  //@debug $h;
+  //@debug $s;
+  //@debug $v;
+  //@debug $adjustHue, $adjustSaturation, $adjustLight;
+  @return ch-hsv-to-color($adjustHue, $adjustSaturation, $adjustLight);
+}
+
+@function ch-hsv-to-color($h, $s: 0, $v: 0) {
+  $hsl: ch-hsv-to-hsl($h, $s, $v);
+  //@debug hsla(nth($hsl, 1), nth($hsl, 2), nth($hsl, 3), 1);
+  @return hsla(nth($hsl, 1), nth($hsl, 2), nth($hsl, 3), 1);
+}
+
+@function ch-hsv-to-hsl($h, $s: 0, $v: 0) {
+  @if type_of($h) == 'list' {
+    $v: nth($h, 3);
+    $s: nth($h, 2);
+    $h: nth($h, 1);
+  }
+
+  @if unit($h) == 'deg' {
+    $h: 3.1415 * 2 * ($h / 360deg);
+  }
+  @if unit($s) == '%' {
+    $s: 0 + (round($s) / 100%);
+  } @else {
+    $s: $s / 100;
+  }
+  @if unit($v) == '%' {
+    $v: if($v >= 100, 1, $v / 100%);
+  }
+
+  $ss: $s * $v;
+  $ll: (2 - $s) * $v;
+
+  @if ($ll == 2 or $ll == 0) {
+    $ss: 0;
+  } @else if $ll <= 1 {
+    $ss: $ss / $ll;
+  } @else {
+    $ss: $ss / (2 - $ll);
+  }
+
+  $ll: $ll / 2;
+
+  @return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $ss))), percentage(max(0, min(1, $ll)));
+}
+
+@function getValue($h,$s,$v, $i, $light) {
+  @if ($light == true) {
+    @return ($v   + $brightnessStep1 * $i) ;
+  }
+  @return ($v  - $brightnessStep2 * $i) ;
+}
+
+@function ch-color-to-hsv($color) {
+  @return ch-hsl-to-hsv($color);
+}
+
+@function ch-hsl-to-hsv($h, $ss: 0, $ll: 0) {
+  @if type_of($h) == 'list' {
+    $ll: nth($h, 3);
+    $ss: nth($h, 2);
+    $h: nth($h, 1);
+  } @else if type_of($h) == 'color' {
+    $ll: lightness($h);
+    $ss: saturation($h);
+    $h: hue($h);
+  }
+
+  @if unit($h) == 'deg' {
+    $h: 3.1415 * 2 * ($h / 360deg);
+  }
+  @if unit($ss) == '%' {
+    $ss: 0 + ($ss / 100%);
+  }
+  @if unit($ll) == '%' {
+    $ll: 0 + ($ll / 100%);
+  }
+
+  $ll: $ll * 2;
+
+  @if $ll <= 1 {
+    $ss: $ss * $ll;
+  } @else {
+    $ss: $ss * (2 - $ll);
+  }
+
+  $v: ($ll + $ss) / 2;
+
+  $s: 0;
+  @if $ll + $ss != 0 {
+    $s: (2 * $ss) / ($ll + $ss);
+  }
+
+  @return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $s))), percentage(max(0, min(1, $v)));
+}
+
+@function getHue($h,$s,$v,$i,$light) {
+  $hue: null;
+  @if ($h >= 60  and $h <= 240) {
+    @if ($light == true) {
+      $hue: $h - $hueStep * $i
+    } @else {
+      $hue: $h + $hueStep * $i
+    }
+  } @else {
+    @if ($light == true) {
+      $hue: $h + $hueStep * $i
+    } @else {
+      $hue: $h - $hueStep * $i
+    }
+  }
+  @if ($hue < 0) {
+    $hue: $hue + 360;
+  } @else if ($hue >= 360) {
+    $hue: $hue - 360;
+  }
+
+  @return $hue
+}
+
+@function getSaturation($h,$s,$v, $i, $light) {
+  $saturation: 0;
+  // grey color don't change saturation
+  @if ($h == 0 and $s == 0) {
+    @return $s;
+  }
+  @if ($light == true) {
+    $saturation: $s  - $saturationStep * $i;
+  } @else if ($i == $darkColorCount) {
+    $saturation: $s  + $saturationStep;
+  } @else {
+    $saturation: $s  + $saturationStep2 * $i;
+  }
+  // 边界值修正
+  @if ($saturation > 100) {
+    $saturation: 100;
+  }
+
+  // 第一格的 s 限制在 6-10 之间
+  @if ($light == true and $i == $lightColorCount and $saturation > 10) {
+    $saturation: 10;
+  }
+  @if ($saturation < 6) {
+    $saturation: 6;
+  }
+  @return round($saturation);
+}
