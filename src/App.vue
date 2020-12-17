@@ -1,6 +1,11 @@
 <template>
-  <div id="nav"></div>
+  <div id="app"></div>
   <router-view />
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+#app {
+  font-size: $h5-14;
+  color: $font-color;
+}
+</style>

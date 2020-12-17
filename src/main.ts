@@ -3,8 +3,10 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 
-import '@/styles/rest.css'
+import DhtUi from '@/componentsBusiness/index' // 导入全局组件
 
-createApp(App)
-  .use(router)
-  .mount('#app')
+const app = createApp(App)
+
+DhtUi(app)
+
+app.use(router).mount('#app')
