@@ -1,12 +1,15 @@
 <template>
   <div class="experiment">
-    <button @click="test">测试数据变化</button>
-    <dht-popper>
-      <div id="ceshi2">5252</div>
-      <template #tooltip>
-        <div id="ceshi">fdsafas</div>
-      </template>
-    </dht-popper>
+    <div class="chengda">
+      <dht-popper>
+        <template #tooltip>
+          <div class="ceshi">显隐内容</div>
+        </template>
+        <div class="ceshi2">绑定的内容</div>
+      </dht-popper>
+    </div>
+
+    <div>ceshi</div>
   </div>
 </template>
 
@@ -38,21 +41,24 @@ export default defineComponent({
 
 <style lang="scss">
 .experiment {
-  width: 100%;
-  min-height: 500px;
+  width: 500px;
+  height: 200px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
-#ceshi,
-#ceshi2 {
+.chengda {
+  width: 300px;
+  height: 900px;
+}
+.ceshi2 {
+  margin-top: 100px;
   width: 100px;
   height: 100px;
   background: red;
 }
-#ceshi2 {
-  width: 300px;
-  height: 300px;
+.ceshi {
+  width: 100px;
+  height: 200px;
   background: #13c2c2;
 }
 </style>
