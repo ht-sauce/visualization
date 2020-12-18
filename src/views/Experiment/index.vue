@@ -8,8 +8,6 @@
         <div class="ceshi2">绑定的内容</div>
       </dht-popper>
     </div>
-
-    <div>ceshi</div>
   </div>
 </template>
 
@@ -23,11 +21,10 @@ export default defineComponent({
     }
     const data = reactive({
       ceshi: [],
-      show: false,
+      show: true,
     } as initData)
 
     function test() {
-      data.ceshi = [1, 2, 3, 4]
       data.show = !data.show
     }
 
@@ -42,23 +39,20 @@ export default defineComponent({
 <style lang="scss">
 .experiment {
   width: 500px;
-  height: 200px;
+  height: 500px;
   display: flex;
-  overflow: auto;
-}
-.chengda {
-  width: 300px;
-  height: 900px;
+  align-items: center;
+  justify-content: center;
 }
 .ceshi2 {
-  margin-top: 100px;
+  box-sizing: border-box;
   width: 100px;
   height: 100px;
   background: red;
 }
 .ceshi {
   width: 100px;
-  height: 200px;
+  height: 100px;
   background: #13c2c2;
 }
 </style>

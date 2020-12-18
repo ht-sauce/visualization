@@ -1,2 +1,41 @@
 .dht-popper {
+  .arrow,
+  .arrow::before {
+    position: absolute;
+    z-index: -1;
+    width: 16px;
+    height: 16px;
+  }
+  .arrow {
+    background: transparent;
+  }
+  .arrow::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+    background: $white;
+    box-shadow: $box-shadow;
+  }
+  .tooltip[data-popper-placement] {
+    box-shadow: $box-shadow;
+  }
+
+  .tooltip[data-popper-placement^='top'] > .arrow {
+    bottom: -8px;
+  }
+
+  .tooltip[data-popper-placement^='bottom'] > .arrow {
+    top: -8px;
+  }
+
+  .tooltip[data-popper-placement^='left'] > .arrow {
+    right: -8px;
+  }
+
+  .tooltip[data-popper-placement^='right'] > .arrow {
+    left: -8px;
+  }
+
+
 }
