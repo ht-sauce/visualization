@@ -1,5 +1,14 @@
+.dht-popup-enter-active,
+.dht-popup-leave-active {
+  transition: opacity 0.3s ease;
+}
+.dht-popup-enter-from,
+.dht-popup-leave-to {
+  opacity: 0;
+}
+
 .dht-popup {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   width: 100%;
   height: 100%;
@@ -8,28 +17,138 @@
   background: $shadow-color;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
-// 居中的弹窗
-.dht-popup-center {
+.dht-popup-no-mask {
+  background: transparent;
+  pointer-events: none;
+}
+
+.dht-popup-base {
+  pointer-events: auto;
   background: $white;
   position: absolute;
+  box-shadow: $box-shadow;
+}
+// 居中的弹窗
+.dht-popup-center {
+  @extend .dht-popup-base;
   top: 15vh;
 }
-
-@keyframes dht-popup-in {
-  0% {
-    opacity: 0;
+// 定义四个方向
+$directions: left, right, top, bottom;
+@mixin dht-popup-class($direction) {
+  .dht-popup-#{$direction}-in {
+    @extend .dht-popup-base;
+    @if $direction == left {
+      left: 0;
+      top: 0;
+      height: 100%;
+    }
+    @if $direction == right {
+      right: 0;
+      top: 0;
+      height: 100%;
+    }
+    @if $direction == top {
+      top: 0;
+      width: 100%;
+    }
+    @if $direction == bottom {
+      bottom: 0;
+      width: 100%;
+    }
+    animation: dht-popup-#{$direction}-in 0.3s ease forwards;
   }
-  100% {
-    opacity: 1;
+  .dht-popup-#{$direction}-out {
+    @extend .dht-popup-base;
+    @if $direction == left {
+      left: 0;
+      top: 0;
+      height: 100%;
+    }
+    @if $direction == right {
+      right: 0;
+      top: 0;
+      height: 100%;
+    }
+    @if $direction == top {
+      top: 0;
+      width: 100%;
+    }
+    @if $direction == bottom {
+      bottom: 0;
+      width: 100%;
+    }
+    animation: dht-popup-#{$direction}-out 0.3s ease forwards;
   }
 }
-
-.dht-popup-enter-active {
-  animation: el-drawer-in .3s;
+@each $i in $directions {
+  @include dht-popup-class($i);
 }
-
-.dht-popup-leave-active {
-  animation: el-drawer-in .3s reverse;
+@mixin dht-popup-animation($direction) {
+  @keyframes dht-popup-#{$direction}-in {
+    0% {
+      @if $direction == left {
+        transform: translateX(-100%);
+      }
+      @if $direction == right {
+        transform: translateX(100%);
+      }
+      @if $direction == top {
+        transform: translateY(-100%);
+      }
+      @if $direction == bottom {
+        transform: translateY(100%);
+      }
+    }
+    100% {
+      @if $direction == left {
+        transform: translateX(0);
+      }
+      @if $direction == right {
+        transform: translateX(0);
+      }
+      @if $direction == top {
+        transform: translateY(0);
+      }
+      @if $direction == bottom {
+        transform: translateY(0);
+      }
+    }
+  }
+  @keyframes dht-popup-#{$direction}-out {
+    0% {
+      @if $direction == left {
+        transform: translateX(0);
+      }
+      @if $direction == right {
+        transform: translateX(0);
+      }
+      @if $direction == top {
+        transform: translateY(0);
+      }
+      @if $direction == bottom {
+        transform: translateY(0);
+      }
+    }
+    100% {
+      @if $direction == left {
+        transform: translateX(-100%);
+      }
+      @if $direction == right {
+        transform: translateX(100%);
+      }
+      @if $direction == top {
+        transform: translateY(-100%);
+      }
+      @if $direction == bottom {
+        transform: translateY(100%);
+      }
+    }
+  }
+}
+@each $i in $directions {
+  @include dht-popup-animation($i);
 }

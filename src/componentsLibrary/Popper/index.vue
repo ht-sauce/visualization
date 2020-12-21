@@ -1,4 +1,5 @@
 <script lang="tsx">
+import { dataType, visibility } from './types'
 import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { Instance, Options } from '@popperjs/core'
@@ -36,9 +37,6 @@ export default defineComponent({
   setup(props, ctx) {
     let popperInstance: Instance | null = null
 
-    interface dataType {
-      show: string
-    }
     const data = reactive({
       show: 'hidden',
     } as dataType)
@@ -82,12 +80,12 @@ export default defineComponent({
     })
 
     function hide() {
-      data.show = 'hidden'
+      data.show = visibility.hidden
       ctx.emit('hide')
     }
 
     function show() {
-      data.show = 'visible'
+      data.show = visibility.visible
       ctx.emit('show')
     }
 
@@ -113,8 +111,8 @@ export default defineComponent({
       (e) => {
         if (props.trigger !== 'manual') return null
 
-        if (e) data.show = 'visible'
-        else data.show = 'hidden'
+        if (e) show()
+        else hide()
       },
     )
 
@@ -123,7 +121,7 @@ export default defineComponent({
         <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>
           {ctx.slots.default && ctx.slots.default()}
         </span>
-        <span class="tooltip" style={{ visibility: data.show } as any} ref={tooltip}>
+        <span class="tooltip" style={{ visibility: data.show }} ref={tooltip}>
           <span class="arrow" data-popper-arrow />
           {ctx.slots.tooltip && ctx.slots.tooltip()}
         </span>
