@@ -1,16 +1,16 @@
 <script lang="tsx">
-import { defineComponent, onMounted, ref, reactive, onUnmounted, Transition } from 'vue'
+import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { Instance, Options } from '@popperjs/core'
 
 export default defineComponent({
   name: 'DhtPopper',
-  components: { Transition },
   props: {
     trigger: {
       type: String,
-      default: 'hover',
+      default: 'hover', // hover,click,manual
     },
+    modelValue: Boolean, // 手动绑定
     disabled: {
       type: Boolean,
       default: false,
@@ -35,12 +35,12 @@ export default defineComponent({
   setup(props, ctx) {
     let popperInstance: Instance | null = null
 
-    interface datai {
+    interface dataType {
       show: string
     }
     const data = reactive({
       show: 'hidden',
-    } as datai)
+    } as dataType)
 
     // 被绑定的
     const popper = ref<string | HTMLElement>('popper')
@@ -80,14 +80,36 @@ export default defineComponent({
       popperInstance = null
     })
 
+    // 点击事件
     function onClick() {
+      if (props.trigger !== 'click') return null
       if (data.show === 'hidden') data.show = 'visible'
       else data.show = 'hidden'
     }
 
+    function onMouseover() {
+      if (props.trigger !== 'hover') return null
+      data.show = 'visible'
+    }
+
+    function onMouseout() {
+      if (props.trigger !== 'hover') return null
+      data.show = 'hidden'
+    }
+
+    watch(
+      () => props.modelValue,
+      (e) => {
+        if (props.trigger !== 'manual') return null
+
+        if (e) data.show = 'visible'
+        else data.show = 'hidden'
+      },
+    )
+
     return () => (
       <span class="dht-popper">
-        <span ref={popper} onClick={onClick}>
+        <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>
           {ctx.slots.default && ctx.slots.default()}
         </span>
         <span class="tooltip" style={{ visibility: data.show } as any} ref={tooltip}>

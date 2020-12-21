@@ -1,7 +1,8 @@
 <template>
   <div class="experiment">
+    <button @click="test">测试</button>
     <div class="chengda">
-      <dht-popper>
+      <dht-popper v-model="show">
         <template #tooltip>
           <div class="ceshi">显隐内容</div>
         </template>
