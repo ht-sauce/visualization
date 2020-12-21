@@ -5,6 +5,7 @@ import type { Instance, Options } from '@popperjs/core'
 
 export default defineComponent({
   name: 'DhtPopper',
+  emits: ['hide', 'show'],
   props: {
     trigger: {
       type: String,
@@ -80,21 +81,31 @@ export default defineComponent({
       popperInstance = null
     })
 
+    function hide() {
+      data.show = 'hidden'
+      ctx.emit('hide')
+    }
+
+    function show() {
+      data.show = 'visible'
+      ctx.emit('show')
+    }
+
     // 点击事件
     function onClick() {
       if (props.trigger !== 'click') return null
-      if (data.show === 'hidden') data.show = 'visible'
-      else data.show = 'hidden'
+      if (data.show === 'hidden') show()
+      else hide()
     }
 
     function onMouseover() {
       if (props.trigger !== 'hover') return null
-      data.show = 'visible'
+      show()
     }
 
     function onMouseout() {
       if (props.trigger !== 'hover') return null
-      data.show = 'hidden'
+      hide()
     }
 
     watch(

@@ -1,9 +1,35 @@
 .dht-popup {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   width: 100%;
   height: 100%;
+  left: 0;
+  top: 0;
   background: $shadow-color;
+  display: flex;
+  justify-content: center;
 }
+
 // 居中的弹窗
-.dht-popup-center {}
+.dht-popup-center {
+  background: $white;
+  position: absolute;
+  top: 15vh;
+}
+
+@keyframes dht-popup-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dht-popup-enter-active {
+  animation: el-drawer-in .3s;
+}
+
+.dht-popup-leave-active {
+  animation: el-drawer-in .3s reverse;
+}

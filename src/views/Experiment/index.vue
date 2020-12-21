@@ -1,14 +1,9 @@
 <template>
   <div class="experiment">
     <button @click="test">测试</button>
-    <div class="chengda">
-      <dht-popper v-model="show">
-        <template #tooltip>
-          <div class="ceshi">显隐内容</div>
-        </template>
-        <div class="ceshi2">绑定的内容</div>
-      </dht-popper>
-    </div>
+    <dht-popup v-model="show">
+      <div class="experiment"><button @click="test">测试</button></div>
+    </dht-popup>
   </div>
 </template>
 
