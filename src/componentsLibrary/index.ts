@@ -6,8 +6,9 @@ import ColorPicker from './ColorPicker'
 import Drag from './Drag'
 // 指令类插件
 import ClickOutside from './ClickOutside'
+import Copy from './Copy'
 
-const plugins = [ClickOutside]
+const plugins = [ClickOutside, Copy]
 
 // 批量注册列表
 const component = [DhtPopup, ColorPicker, Popper, Drag]

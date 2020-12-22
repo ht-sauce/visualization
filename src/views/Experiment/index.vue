@@ -1,6 +1,6 @@
 <template>
   <div class="experiment">
-    <!--<button v-dht-click-outside="testFun" @click="test">测试</button>-->
+    <button v-dht-copy="14213213" @click="testFun">剪切板测试</button>
     <!--<button v-on:click="shuffle">Shuffle</button>-->
     <dht-color-picker v-model="show">
       <button @click="test">测试</button>
@@ -45,10 +45,17 @@ export default defineComponent({
       // data.items = shuffle2(data.items)
     }
 
+    function testFun(e: Event) {
+      console.log(e)
+      //navigator.clipboard.writeText('fdafsa')
+      //document.execCommand('Copy')
+    }
+
     return {
       ...toRefs(data),
       test,
       shuffle,
+      testFun,
     }
   },
 })
