@@ -1,9 +1,10 @@
 <template>
   <div class="experiment">
-    <button @click="test">测试</button>
-    <dht-popup v-model="show" direction="left">
-      <div class="experiment-top"><button @click="test">测试</button></div>
-    </dht-popup>
+    <!--<button v-dht-click-outside="testFun" @click="test">测试</button>-->
+    <!--<button v-on:click="shuffle">Shuffle</button>-->
+    <dht-color-picker v-model="show">
+      <button @click="test">测试</button>
+    </dht-color-picker>
   </div>
 </template>
 
@@ -14,24 +15,40 @@ export default defineComponent({
     interface initData {
       ceshi: number[]
       show: boolean
+      items: number[]
     }
     const data = reactive({
-      ceshi: [],
-      show: true,
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      show: false,
     } as initData)
 
     function test() {
       data.show = !data.show
     }
 
-    function beforeClose(done: () => void) {
-      done()
+    function shuffle2(arry: any) {
+      var sortArr = []
+      var len = arry.length //获取数组长度指定随机次数
+
+      for (var i = 0; i < len; ) {
+        var index = Math.floor(Math.random() * len)
+        if (arry[index] != null) {
+          sortArr.push(arry[index])
+          i++
+          arry[index] = null
+        }
+      }
+      return sortArr
+    }
+
+    function shuffle() {
+      // data.items = shuffle2(data.items)
     }
 
     return {
       ...toRefs(data),
       test,
-      beforeClose,
+      shuffle,
     }
   },
 })
@@ -39,41 +56,8 @@ export default defineComponent({
 
 <style lang="scss">
 .experiment {
-  width: 500px;
-  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.experiment-2 {
-  width: 1000px;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: red;
-}
-.experiment-left {
-  width: 300px;
-  height: 100%;
-  background: deepskyblue;
-}
-
-.experiment-top {
-  width: 100%;
-  height: 100%;
-  background: deepskyblue;
-}
-.ceshi2 {
-  box-sizing: border-box;
-  width: 100px;
-  height: 100px;
-  background: red;
-}
-.ceshi {
-  width: 100px;
-  height: 100px;
-  background: #13c2c2;
 }
 </style>

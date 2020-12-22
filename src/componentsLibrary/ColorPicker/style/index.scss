@@ -1,2 +1,31 @@
-.dht-colorPicker {
+.color-picker {
+  padding: 10px;
+  $width: 240px;
+  .fixed-color {
+    margin-bottom: 8px;
+    width: $width;
+    line-height: 0;
+    .fixed-color-li {
+      margin: -1px -1px 0 0 ;
+      width: 21px;
+      height: 21px;
+      display: inline-block;
+      border: $border-1 1px solid;
+    }
+  }
+  .color-board {
+    width: $width;
+    display: flex;
+    justify-content: space-between;
+    .board {
+      width: 210px;
+      height: 200px;
+      background: red;
+    }
+    .adjust {
+      width: 20px;
+      height: 200px;
+      background: #52c41a;
+    }
+  }
 }

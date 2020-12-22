@@ -3,10 +3,13 @@ import { dataType, visibility } from './types'
 import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { Instance, Options } from '@popperjs/core'
-
+import ClickOutside from '../ClickOutside'
 export default defineComponent({
   name: 'DhtPopper',
-  emits: ['hide', 'show'],
+  emits: ['update:modelValue', 'hide', 'show'],
+  directives: {
+    'dht-click-outside': ClickOutside.directive,
+  },
   props: {
     trigger: {
       type: String,
@@ -32,6 +35,10 @@ export default defineComponent({
     options: {
       type: Object,
       default: () => null, // 出现ts问题参考：https://github.com/vuejs/vue-next/issues/2474
+    },
+    clickOutside: {
+      type: Boolean,
+      default: true,
     },
   },
   setup(props, ctx) {
@@ -81,11 +88,13 @@ export default defineComponent({
 
     function hide() {
       data.show = visibility.hidden
+      ctx.emit('update:modelValue', false)
       ctx.emit('hide')
     }
 
     function show() {
       data.show = visibility.visible
+      ctx.emit('update:modelValue', true)
       ctx.emit('show')
     }
 
@@ -116,13 +125,22 @@ export default defineComponent({
       },
     )
 
+    function clickOutside() {
+      if (props.clickOutside) hide()
+    }
+
     return () => (
       <span class="dht-popper">
         <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>
           {ctx.slots.default && ctx.slots.default()}
         </span>
-        <span class="tooltip" style={{ visibility: data.show }} ref={tooltip}>
-          <span class="arrow" data-popper-arrow />
+        <span
+          v-dht-click-outside={clickOutside}
+          class="tooltip"
+          style={{ visibility: data.show }}
+          ref={tooltip}
+        >
+          {props.arrow && <span class="arrow" data-popper-arrow />}
           {ctx.slots.tooltip && ctx.slots.tooltip()}
         </span>
       </span>
