@@ -4,6 +4,7 @@ import DhtPopup from './Popup'
 import Popper from './Popper'
 import ColorPicker from './ColorPicker'
 import Drag from './Drag'
+import Icon from './Icon'
 // 指令类插件
 import ClickOutside from './ClickOutside'
 import Copy from './Copy'
@@ -11,7 +12,7 @@ import Copy from './Copy'
 const plugins = [ClickOutside, Copy]
 
 // 批量注册列表
-const component = [DhtPopup, ColorPicker, Popper, Drag]
+const component = [DhtPopup, ColorPicker, Popper, Drag, Icon]
 
 const defaultInstallOpt = {
   zIndex: 1000,

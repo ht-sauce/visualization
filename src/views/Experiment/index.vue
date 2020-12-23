@@ -5,6 +5,7 @@
     <dht-color-picker v-model="show">
       <button @click="test">测试</button>
     </dht-color-picker>
+    <dht-icon name="electronics"></dht-icon>
   </div>
 </template>
 
