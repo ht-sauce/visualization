@@ -1,5 +1,11 @@
 <template>
-  <popper v-model="show" trigger="manual" :arrow="false" :offset="8">
+  <popper
+    :modelValue="modelValue"
+    @hide="$emit('update:modelValue', false)"
+    trigger="manual"
+    :arrow="false"
+    :offset="8"
+  >
     <template #tooltip>
       <div class="color-picker">
         <!--固定颜色部分-->
@@ -32,25 +38,11 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const data = reactive({
-      show: props.modelValue,
       fixedColors: new Array(36).fill(''),
     })
-    watch(
-      () => props.modelValue,
-      (e) => {
-        data.show = e
-      },
-    )
-    watch(
-      () => data.show,
-      (e) => {
-        ctx.emit('update:modelValue', e)
-      },
-    )
     // 确认颜色
     function confirmColor(color: string) {
       ctx.emit('confirm', color)
-      data.show = false
     }
 
     return {

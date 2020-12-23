@@ -1,6 +1,6 @@
 <template>
   <div class="experiment">
-    <button v-dht-copy="14213213" @click="testFun">剪切板测试</button>
+    <button @click="test">剪切板测试</button>
     <!--<button v-on:click="shuffle">Shuffle</button>-->
     <dht-color-picker v-model="show">
       <button @click="test">测试</button>
