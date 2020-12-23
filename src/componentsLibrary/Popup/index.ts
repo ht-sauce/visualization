@@ -1,8 +1,8 @@
 import { App } from 'vue'
-import Popup from './index.vue'
+import DhtPopup from './index.vue'
 
-export { Popup }
+export { DhtPopup }
 
 export default (app: App): void => {
-  app.component(Popup.name, Popup)
+  app.component(DhtPopup.name, DhtPopup)
 }

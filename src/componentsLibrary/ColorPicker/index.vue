@@ -1,5 +1,5 @@
 <template>
-  <popper
+  <dht-popper
     :modelValue="modelValue"
     @hide="$emit('update:modelValue', false)"
     trigger="manual"
@@ -21,16 +21,16 @@
       </div>
     </template>
     <slot></slot>
-  </popper>
+  </dht-popper>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch, computed } from 'vue'
-import { Popper } from '../Popper'
+import { DhtPopper } from '../Popper'
 export default defineComponent({
   name: 'DhtColorPicker',
   components: {
-    Popper,
+    DhtPopper,
   },
   emits: ['update:modelValue', 'confirm'],
   props: {

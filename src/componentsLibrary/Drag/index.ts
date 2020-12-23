@@ -1,8 +1,8 @@
 import { App } from 'vue'
-import Drag from './index.vue'
+import DhtDrag from './index.vue'
 
-export { Drag }
+export { DhtDrag }
 
 export default (app: App): void => {
-  app.component(Drag.name, Drag)
+  app.component(DhtDrag.name, DhtDrag)
 }

@@ -1,0 +1,10 @@
+.dht-button {
+  padding: 8px 15px;
+  box-shadow: $box-shadow;
+  background: $white;
+  border: none;
+  outline: none;
+  &:active {
+    background: $primary-1;
+  }
+}

@@ -8,9 +8,9 @@ $black: #000;
 
 // 四色提醒
 $success: #52c41a;
-$warn: #fa8c16;
+$warn: #faad14;
 $error: #f5222d;
-$info: #1890ff;
+$info: #bfbfbf;
 
 $primary-1: generateColor($main-color, 5, true);
 $primary-2: generateColor($main-color, 4, true);
@@ -24,8 +24,13 @@ $primary-8: generateColor($main-color, 3, false);
 $primary-9: generateColor($main-color, 4, false);
 
 // 字体颜色
-$font-color: lighten($black, 15%);
-$font-disable: lighten($black, 50%);
+$font-color: lighten($black, 10%);
+$font-color-second: lighten($black, 30%);
+$font-disable: lighten($black, 60%);
+// 灰色系配置
+$grey-96: lighten($black, 96%);
+$grey-94: lighten($black, 94%);
+$grey-90: lighten($black, 90%);
 
 // 字体大小
 $h1-32: 32px;

@@ -1,8 +1,8 @@
 import { App } from 'vue'
-import Popper from './index.vue'
+import DhtPopper from './index.vue'
 
-export { Popper }
+export { DhtPopper }
 
 export default (app: App): void => {
-  app.component(Popper.name, Popper)
+  app.component(DhtPopper.name, DhtPopper)
 }

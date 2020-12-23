@@ -1,8 +1,8 @@
 import { App } from 'vue'
-import ColorPicker from './index.vue'
+import DhtColorPicker from './index.vue'
 
-export { ColorPicker }
+export { DhtColorPicker }
 
 export default (app: App): void => {
-  app.component(ColorPicker.name, ColorPicker)
+  app.component(DhtColorPicker.name, DhtColorPicker)
 }
