@@ -43,6 +43,7 @@ export default defineComponent({
     // 确认颜色
     function confirmColor(color: string) {
       ctx.emit('confirm', color)
+      ctx.emit('update:modelValue', false)
     }
 
     return {

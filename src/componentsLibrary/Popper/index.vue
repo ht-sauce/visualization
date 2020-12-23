@@ -126,19 +126,14 @@ export default defineComponent({
     )
 
     function clickOutside() {
-      if (!props.modelValue) return
+      if (props.trigger === 'hover') return
+      if (data.show === 'hidden') return
       if (props.clickOutside) hide()
     }
 
     return () => (
-      <span class="dht-popper">
-        <span
-          v-dht-click-outside={clickOutside}
-          ref={popper}
-          onClick={onClick}
-          onMouseover={onMouseover}
-          onMouseout={onMouseout}
-        >
+      <span v-dht-click-outside={clickOutside} class="dht-popper">
+        <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>
           {ctx.slots.default && ctx.slots.default()}
         </span>
         <span class="tooltip" style={{ visibility: data.show }} ref={tooltip}>
