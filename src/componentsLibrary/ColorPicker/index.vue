@@ -1,3 +1,4 @@
+<!--参考来自：https://juejin.cn/post/6844903908339351560#heading-6-->
 <template>
   <dht-popper
     :modelValue="modelValue"
@@ -17,6 +18,7 @@
         <div class="color-board">
           <div class="board"></div>
           <div class="adjust"></div>
+          <div class="alpha"></div>
         </div>
       </div>
     </template>

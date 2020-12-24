@@ -1,9 +1,9 @@
 import { App } from 'vue'
-import Copy from './directive'
+import DhtCopy from './directive'
 
 export default {
   install(app: App) {
-    app.directive('dht-copy', Copy)
+    app.directive('dht-copy', DhtCopy)
   },
-  directive: Copy,
+  directive: DhtCopy,
 }

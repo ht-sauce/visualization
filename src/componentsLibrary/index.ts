@@ -11,8 +11,9 @@ import DhtButton from './Button'
 // 指令类插件
 import DhtClickOutside from './ClickOutside'
 import DhtCopy from './Copy'
+import DhtMove from './Move'
 
-const plugins = [DhtClickOutside, DhtCopy]
+const plugins = [DhtClickOutside, DhtCopy, DhtMove]
 
 // 批量注册列表
 const component = [DhtPopup, DhtColorPicker, DhtPopper, DhtDrag, DhtIcon, DhtButton]

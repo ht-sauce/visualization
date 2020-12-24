@@ -15,17 +15,44 @@
   }
   .color-board {
     width: $width;
-    display: flex;
-    justify-content: space-between;
     .board {
-      width: 210px;
+      width: 100%;
       height: 200px;
-      background: red;
+      position: relative;
+      background: transparent;
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      // 饱和度 一条从左往右，由纯白到透明的径向渐变
+      &::before {
+        background: linear-gradient(to right, white, transparent);
+      }
+      // 明度 一条从下往上，由纯黑到透明的径向渐变
+      &::after {
+        background: linear-gradient(to top, black, transparent);
+      }
     }
+    // 颜色条子
     .adjust {
-      width: 20px;
-      height: 200px;
-      background: #52c41a;
+      width: 100%;
+      height: 20px;
+      margin: 10px 0;
+      background: linear-gradient(to right, #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%);
+    }
+    // 透明板子
+    .alpha {
+      width: 100%;
+      height: 20px;
+      background-color: white;
+      background-image: linear-gradient(45deg, #c5c5c5 25%, transparent 0, transparent 75%, #c5c5c5 0, #c5c5c5), linear-gradient(45deg, #c5c5c5 25%, transparent 0, transparent 75%, #c5c5c5 0, #c5c5c5);
+      background-size: 10px 10px;
+      background-position: 0 0, 5px 5px;
     }
   }
 }

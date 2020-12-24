@@ -1,0 +1,134 @@
+@import "../fuc/generateColor.scss";
+
+// color palettes
+$blue-6: #1890ff;
+$blue-1: generateColor($blue-6, 5, true);
+$blue-2: generateColor($blue-6, 4, true);
+$blue-3: generateColor($blue-6, 3, true);
+$blue-4: generateColor($blue-6, 2, true);
+$blue-5: generateColor($blue-6, 1, true);
+$blue-7: generateColor($blue-6, 1, false);
+$blue-8: generateColor($blue-6, 2, false);
+$blue-9: generateColor($blue-6, 3, false);
+$blue-10: generateColor($blue-6, 4, false);
+
+$purple-6: #722ed1;
+$blue-1: generateColor($purple-6, 5, true);
+$blue-2: generateColor($purple-6, 4, true);
+$blue-3: generateColor($purple-6, 3, true);
+$blue-4: generateColor($purple-6, 2, true);
+$blue-5: generateColor($purple-6, 1, true);
+$blue-7: generateColor($purple-6, 1, false);
+$blue-8: generateColor($purple-6, 2, false);
+$blue-9: generateColor($purple-6, 3, false);
+$blue-10: generateColor($purple-6, 4, false);
+
+$cyan-6: #13c2c2;
+$blue-1: generateColor($cyan-6, 5, true);
+$blue-2: generateColor($cyan-6, 4, true);
+$blue-3: generateColor($cyan-6, 3, true);
+$blue-4: generateColor($cyan-6, 2, true);
+$blue-5: generateColor($cyan-6, 1, true);
+$blue-7: generateColor($cyan-6, 1, false);
+$blue-8: generateColor($cyan-6, 2, false);
+$blue-9: generateColor($cyan-6, 3, false);
+$blue-10: generateColor($cyan-6, 4, false);
+
+$green-6: #52c41a;
+$blue-1: generateColor($green-6, 5, true);
+$blue-2: generateColor($green-6, 4, true);
+$blue-3: generateColor($green-6, 3, true);
+$blue-4: generateColor($green-6, 2, true);
+$blue-5: generateColor($green-6, 1, true);
+$blue-7: generateColor($green-6, 1, false);
+$blue-8: generateColor($green-6, 2, false);
+$blue-9: generateColor($green-6, 3, false);
+$blue-10: generateColor($green-6, 4, false);
+
+$pink-6: #eb2f96;
+$blue-1: generateColor($pink-6, 5, true);
+$blue-2: generateColor($pink-6, 4, true);
+$blue-3: generateColor($pink-6, 3, true);
+$blue-4: generateColor($pink-6, 2, true);
+$blue-5: generateColor($pink-6, 1, true);
+$blue-7: generateColor($pink-6, 1, false);
+$blue-8: generateColor($pink-6, 2, false);
+$blue-9: generateColor($pink-6, 3, false);
+$blue-10: generateColor($pink-6, 4, false);
+
+$red-6: #f5222d;
+$blue-1: generateColor($red-6, 5, true);
+$blue-2: generateColor($red-6, 4, true);
+$blue-3: generateColor($red-6, 3, true);
+$blue-4: generateColor($red-6, 2, true);
+$blue-5: generateColor($red-6, 1, true);
+$blue-7: generateColor($red-6, 1, false);
+$blue-8: generateColor($red-6, 2, false);
+$blue-9: generateColor($red-6, 3, false);
+$blue-10: generateColor($red-6, 4, false);
+
+$orange-6: #fa8c16;
+$blue-1: generateColor($orange-6, 5, true);
+$blue-2: generateColor($orange-6, 4, true);
+$blue-3: generateColor($orange-6, 3, true);
+$blue-4: generateColor($orange-6, 2, true);
+$blue-5: generateColor($orange-6, 1, true);
+$blue-7: generateColor($orange-6, 1, false);
+$blue-8: generateColor($orange-6, 2, false);
+$blue-9: generateColor($orange-6, 3, false);
+$blue-10: generateColor($orange-6, 4, false);
+
+$yellow-6: #fadb14;
+$blue-1: generateColor($yellow-6, 5, true);
+$blue-2: generateColor($yellow-6, 4, true);
+$blue-3: generateColor($yellow-6, 3, true);
+$blue-4: generateColor($yellow-6, 2, true);
+$blue-5: generateColor($yellow-6, 1, true);
+$blue-7: generateColor($yellow-6, 1,false);
+$blue-8: generateColor($yellow-6, 2, false);
+$blue-9: generateColor($yellow-6, 3, false);
+$blue-10: generateColor($yellow-6, 4, false);
+
+$volcano-6: #fa541c;
+$blue-1: generateColor($yellow-6, 5, true);
+$blue-2: generateColor($yellow-6, 4, true);
+$blue-3: generateColor($yellow-6, 3, true);
+$blue-4: generateColor($yellow-6, 2, true);
+$blue-5: generateColor($yellow-6, 1, true);
+$blue-7: generateColor($yellow-6, 1,false);
+$blue-8: generateColor($yellow-6, 2, false);
+$blue-9: generateColor($yellow-6, 3, false);
+$blue-10: generateColor($yellow-6, 4, false);
+
+$geekblue-6: #2f54eb;
+$blue-1: generateColor($geekblue-6, 5, true);
+$blue-2: generateColor($geekblue-6, 4, true);
+$blue-3: generateColor($geekblue-6, 3, true);
+$blue-4: generateColor($geekblue-6, 2, true);
+$blue-5: generateColor($geekblue-6, 1, true);
+$blue-7: generateColor($geekblue-6, 1,false);
+$blue-8: generateColor($geekblue-6, 2, false);
+$blue-9: generateColor($geekblue-6, 3, false);
+$blue-10: generateColor($geekblue-6, 4, false);
+
+$lime-6: #a0d911;
+$blue-1: generateColor($lime-6, 5, true);
+$blue-2: generateColor($lime-6, 4, true);
+$blue-3: generateColor($lime-6, 3, true);
+$blue-4: generateColor($lime-6, 2, true);
+$blue-5: generateColor($lime-6, 1, true);
+$blue-7: generateColor($lime-6, 1,false);
+$blue-8: generateColor($lime-6, 2, false);
+$blue-9: generateColor($lime-6, 3, false);
+$blue-10: generateColor($lime-6, 4, false);
+
+$gold-6: #faad14;
+$blue-1: generateColor($gold-6, 5, true);
+$blue-2: generateColor($gold-6, 4, true);
+$blue-3: generateColor($gold-6, 3, true);
+$blue-4: generateColor($gold-6, 2, true);
+$blue-5: generateColor($gold-6, 1, true);
+$blue-7: generateColor($gold-6, 1,false);
+$blue-8: generateColor($gold-6, 2, false);
+$blue-9: generateColor($gold-6, 3, false);
+$blue-10: generateColor($gold-6, 4, false);

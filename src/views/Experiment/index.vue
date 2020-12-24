@@ -1,7 +1,9 @@
 <template>
   <div class="experiment">
     <dht-button>按钮测试</dht-button>
-    <button @click="test">剪切板测试</button>
+    <div class="ceshi">
+      <button v-dht-move.boundary="shuffle">剪切板测试</button>
+    </div>
     <!--<button v-on:click="shuffle">Shuffle</button>-->
     <dht-color-picker v-model="show">
       <button @click="test">测试</button>
@@ -43,7 +45,8 @@ export default defineComponent({
       return sortArr
     }
 
-    function shuffle() {
+    function shuffle(e: any) {
+      console.log(e)
       // data.items = shuffle2(data.items)
     }
 
@@ -68,5 +71,12 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.ceshi {
+  margin-top: 200px;
+  margin-left: 200px;
+  height: 300px;
+  width: 400px;
+  background: #eb2f96;
 }
 </style>

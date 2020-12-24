@@ -1,16 +1,17 @@
-@import "../fuc/generateColor.scss";
+@import "../fuc/generateColor";
+@import "./colors";
 
 // 总体颜色
-$main-color: #13c2c2; // 主颜色
+$main-color: $cyan-6; // 主颜色
 
 $white: #fff;
 $black: #000;
 
 // 四色提醒
-$success: #52c41a;
-$warn: #faad14;
-$error: #f5222d;
-$info: #bfbfbf;
+$success: $green-6;
+$warn: $gold-6;
+$error: $red-6;
+$info: lighten($black, 60%);
 
 $primary-1: generateColor($main-color, 5, true);
 $primary-2: generateColor($main-color, 4, true);
