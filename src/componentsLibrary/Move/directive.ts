@@ -3,15 +3,16 @@ import { DirectiveBinding } from 'vue'
 const Move = {
   // 绑定元素的父组件挂载时调用
   mounted(el: HTMLElement, binding: DirectiveBinding) {
+    const dragBox = el //获取当前元素
     const boundary = binding.modifiers?.boundary ?? false // 是否控制边界
-
     const callback =
       binding.value ??
       ((arg: any) => {
         return null
       })
+    const x = el.getAttribute('dht-move-x') !== 'false'
+    const y = el.getAttribute('dht-move-y') !== 'false'
 
-    const dragBox = el //获取当前元素
     dragBox.style.position = 'absolute'
     const pdom = dragBox.parentNode as HTMLElement
     boundary && (pdom.style.position = 'relative')
@@ -44,7 +45,7 @@ const Move = {
         let percentY = 0
         // 当传入true代表控制边界
         if (boundary) {
-          left = left > maxw ? maxw : left < minh ? minh : left
+          left = left > maxw ? maxw : left < minw ? minw : left
           top = top > maxh ? maxh : top < minh ? minh : top
           // 计算移动百分比
           percentX = Number(((left / maxw) * 100).toFixed(2))
@@ -52,8 +53,8 @@ const Move = {
         }
 
         //移动当前元素
-        dragBox.style.left = left + 'px'
-        dragBox.style.top = top + 'px'
+        x && (dragBox.style.left = left + 'px')
+        y && (dragBox.style.top = top + 'px')
 
         callback({ left, top, percentX, percentY })
       }

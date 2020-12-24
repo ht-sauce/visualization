@@ -2,7 +2,7 @@
   <div class="experiment">
     <dht-button>按钮测试</dht-button>
     <div class="ceshi">
-      <button v-dht-move.boundary="shuffle">剪切板测试</button>
+      <button dht-move-x="false" v-dht-move.boundary="shuffle">剪切板测试</button>
     </div>
     <!--<button v-on:click="shuffle">Shuffle</button>-->
     <dht-color-picker v-model="show">
@@ -46,7 +46,7 @@ export default defineComponent({
     }
 
     function shuffle(e: any) {
-      console.log(e)
+      // console.log(e)
       // data.items = shuffle2(data.items)
     }
 
