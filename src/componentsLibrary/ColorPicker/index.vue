@@ -54,9 +54,7 @@
         <!--颜色数值展示区域-->
         <div class="color-show">
           <div>{{ hex.toUpperCase() }}</div>
-          <div>
-            {{ `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alphax / 100})` }}
-          </div>
+          <div>{{ rgba }}</div>
           <div class="confirm-color" @click="confirmColor">确定</div>
         </div>
       </div>
@@ -108,12 +106,18 @@ export default defineComponent({
     const hsl = computed(() => hsv2hsl(data.hsv.h, data.hsv.s, data.hsv.v))
     const rgb = computed(() => hsv2rgb(data.hsv.h, data.hsv.s, data.hsv.v))
     const hex = computed(() => rgb2hex(rgb.value.r, rgb.value.g, rgb.value.b))
+    const rgba = computed(
+      () => `rgba(${rgb.value.r}, ${rgb.value.g}, ${rgb.value.b}, ${data.alphax / 100})`,
+    )
     // 确认颜色
     function confirmColor(color: string) {
       // const colors = data.fixedColors
       // colors.unshift(hex.value)
       // data.fixedColors = colors.slice(0, 36)
-      ctx.emit('confirm', color)
+      ctx.emit('confirm', {
+        hex: hex.value,
+        rgba: rgba.value,
+      })
       ctx.emit('update:modelValue', false)
     }
     // 色板选择，饱和度
@@ -138,6 +142,7 @@ export default defineComponent({
       hsl,
       rgb,
       hex,
+      rgba,
       confirmColor,
       boardPoint,
       colorSlider,
