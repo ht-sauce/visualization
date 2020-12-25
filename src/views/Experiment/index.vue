@@ -2,7 +2,7 @@
   <div class="experiment">
     <dht-button>按钮测试</dht-button>
     <div class="ceshi">
-      <button dht-move-x="false" v-dht-move.boundary="shuffle">剪切板测试</button>
+      <button v-dht-move.boundary="{ callback: shuffle, x: 100, y: 100 }">剪切板测试</button>
     </div>
     <!--<button v-on:click="shuffle">Shuffle</button>-->
     <dht-color-picker v-model="show">
@@ -20,6 +20,7 @@ export default defineComponent({
       ceshi: number[]
       show: boolean
       items: number[]
+      xy: { x: 10; y: 10 }
     }
     const data = reactive({
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -30,23 +31,8 @@ export default defineComponent({
       data.show = !data.show
     }
 
-    function shuffle2(arry: any) {
-      var sortArr = []
-      var len = arry.length //获取数组长度指定随机次数
-
-      for (var i = 0; i < len; ) {
-        var index = Math.floor(Math.random() * len)
-        if (arry[index] != null) {
-          sortArr.push(arry[index])
-          i++
-          arry[index] = null
-        }
-      }
-      return sortArr
-    }
-
     function shuffle(e: any) {
-      // console.log(e)
+      console.log(e)
       // data.items = shuffle2(data.items)
     }
 
@@ -73,10 +59,9 @@ export default defineComponent({
   justify-content: center;
 }
 .ceshi {
-  margin-top: 200px;
-  margin-left: 200px;
   height: 300px;
   width: 400px;
   background: #eb2f96;
+  transition: left 0.3s ease-in;
 }
 </style>

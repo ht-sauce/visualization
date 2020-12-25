@@ -16,9 +16,18 @@
           </template>
         </ul>
         <div class="color-board">
-          <div class="board"></div>
+          <div class="board">
+            <div class=""></div>
+          </div>
           <div class="adjust"></div>
-          <div class="alpha"></div>
+          <!--<div
+            class="alpha"
+            :style="{
+              background: `linear-gradient(to right, transparent, hsl(${hsl.h}, ${hsl.s * 100}%, ${
+                hsl.l * 100
+              }%))`,
+            }"
+          ></div>-->
         </div>
       </div>
     </template>
@@ -29,6 +38,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch, computed } from 'vue'
 import { DhtPopper } from '../Popper'
+import { hsv2rgb, rgb2hsv, hsv2hsl, hsl2hsv, hex2rgb, rgb2hex, parseColor } from './color'
 export default defineComponent({
   name: 'DhtColorPicker',
   components: {
