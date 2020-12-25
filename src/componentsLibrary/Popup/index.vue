@@ -1,25 +1,27 @@
 <template>
-  <transition name="dht-popup">
-    <div
-      v-if="show"
-      @click.self="maskCloseEvent"
-      class="dht-popup"
-      :style="{ zIndex: zindex }"
-      :class="{ 'dht-popup-no-mask': !mask }"
-    >
-      <!--居中出现-->
-      <template v-if="direction === 'center'">
-        <div class="dht-popup-center">
-          <slot></slot>
-        </div>
-      </template>
-      <template v-else>
-        <div :class="animationShow ? `dht-popup-${direction}-in` : `dht-popup-${direction}-out`">
-          <slot></slot>
-        </div>
-      </template>
-    </div>
-  </transition>
+  <teleport to="body" :disabled="!ToBody">
+    <transition name="dht-popup">
+      <div
+        v-if="show"
+        @click.self="maskCloseEvent"
+        class="dht-popup"
+        :style="{ zIndex: zindex }"
+        :class="{ 'dht-popup-no-mask': !mask }"
+      >
+        <!--居中出现-->
+        <template v-if="direction === 'center'">
+          <div class="dht-popup-center">
+            <slot></slot>
+          </div>
+        </template>
+        <template v-else>
+          <div :class="animationShow ? `dht-popup-${direction}-in` : `dht-popup-${direction}-out`">
+            <slot></slot>
+          </div>
+        </template>
+      </div>
+    </transition>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -47,6 +49,7 @@ export default defineComponent({
       type: Boolean,
       default: true, // true, 存在遮罩，false不要遮罩
     },
+    ToBody: Boolean, // 是否插入到body下面
   },
   setup(props, ctx) {
     const $DHT = globalConfig()

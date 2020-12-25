@@ -99,12 +99,11 @@ export const rgb2hsv = (r: number, g: number, b: number, a?: number): Hsva => {
   b = boundValue(b, 255)
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
-  let h = 0,
-    s
-  let v = max
+  let h = 0
+  const v = max
 
   const d = max - min
-  s = max === 0 ? 0 : d / max
+  const s = max === 0 ? 0 : d / max
 
   if (max === min) {
     h = 0
@@ -153,12 +152,10 @@ export const hsv2hsl = (h: number, s: number, v: number) => {
  * @param a
  */
 export const hsl2hsv = (h: number, s: number, l: number, a?: number): Hsva => {
-  let _s
-  let _v
   l *= 2
   s *= l <= 1 ? l : 2 - l
-  _v = (l + s) / 2
-  _s = (2 * s) / (l + s)
+  const _v = (l + s) / 2
+  const _s = (2 * s) / (l + s)
   return {
     h,
     s: _s,
