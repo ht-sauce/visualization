@@ -1,10 +1,8 @@
 <template>
   <div class="experiment">
-    <!--<dht-button @click="testFun">测试2</dht-button>
-    <dht-color-picker v-model="show">
-      <dht-button @click="test">按钮测试</dht-button>
-    </dht-color-picker>-->
-    <CalendarBase :month="12" :year="2020" />
+    <dht-button @click="month = month + 1">{{ month }}月份+</dht-button>
+    <dht-button @click="month = month - 1">{{ month }}月份-</dht-button>
+    <CalendarBase :month="month" :year="2020" />
   </div>
 </template>
 
@@ -15,6 +13,7 @@ export default defineComponent({
     const data = reactive({
       show: false,
       show2: false,
+      month: 10,
     })
 
     function test() {

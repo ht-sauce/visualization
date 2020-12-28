@@ -5,7 +5,7 @@
     </template>
     <div class="hr"></div>
     <template v-for="(li, index) in list" :key="index">
-      <li class="day">{{ li.day }}</li>
+      <li class="day" :class="{ gary: li.type !== 'current' }">{{ li.day }}</li>
     </template>
   </ul>
 </template>
