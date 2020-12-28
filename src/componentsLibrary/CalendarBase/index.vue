@@ -5,7 +5,9 @@
     </template>
     <div class="hr"></div>
     <template v-for="(li, index) in list" :key="index">
-      <li class="day" :class="{ gary: li.type !== 'current' }">{{ li.day }}</li>
+      <li @click="onChange(li)" class="day" :class="{ gary: li.type !== 'current' }">
+        {{ li.day }}
+      </li>
     </template>
   </ul>
 </template>
@@ -16,7 +18,7 @@ import CalendarTool from './tool'
 import { ListType, YMD } from './types'
 export default defineComponent({
   name: 'CalendarBase',
-  emits: [],
+  emits: ['change'],
   props: {
     month: {
       required: true,
@@ -57,8 +59,13 @@ export default defineComponent({
       },
     )
 
+    function onChange(e: ListType) {
+      ctx.emit('change', e)
+    }
+
     return {
       ...toRefs(data),
+      onChange,
     }
   },
 })
