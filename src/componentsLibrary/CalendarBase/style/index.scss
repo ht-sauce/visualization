@@ -1,0 +1,19 @@
+.calendar-base {
+  width: 280px;
+  .hr {
+    border-bottom: 1px $grey-96 solid;
+    margin: 2px 0;
+  }
+  .day {
+    box-sizing: border-box;
+    $height: 32px;
+    display: inline-block;
+    width: 38px;
+    height: $height;
+    text-align: center;
+    line-height: $height;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

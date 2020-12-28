@@ -1,9 +1,10 @@
 <template>
   <div class="experiment">
-    <dht-button @click="testFun">测试2</dht-button>
+    <!--<dht-button @click="testFun">测试2</dht-button>
     <dht-color-picker v-model="show">
       <dht-button @click="test">按钮测试</dht-button>
-    </dht-color-picker>
+    </dht-color-picker>-->
+    <CalendarBase :month="12" :year="2020" />
   </div>
 </template>
 
