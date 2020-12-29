@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { dataType, visibility } from './types'
-import { defineComponent, onMounted, ref, reactive, onUnmounted, watch, Teleport } from 'vue'
+import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { Instance, Options } from '@popperjs/core'
 import ClickOutside from '../ClickOutside'
