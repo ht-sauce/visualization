@@ -2,7 +2,14 @@
   <div class="experiment">
     <dht-button @click="month = month + 1">{{ month }}月份+</dht-button>
     <dht-button @click="month = month - 1">{{ month }}月份-</dht-button>
-    <CalendarBase :month="month" :year="2020" />
+    <calendar-base :month="month" :year="2020">
+      <template #week="{ li }">
+        <slot>{{ li }}</slot>
+      </template>
+      <template #default="{ li }">
+        <slot>{{ li.day }}</slot>
+      </template>
+    </calendar-base>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./tsdist", // 编译后生成的文件目录
     "target": "esnext",
     "module": "esnext",
@@ -10,9 +11,10 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     "noImplicitAny": true,
+    "incremental": false,
     "types": [
       "webpack-env"
     ],

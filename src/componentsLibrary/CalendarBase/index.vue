@@ -1,12 +1,14 @@
 <template>
   <ul class="calendar-base">
     <template v-for="week in weeks" :key="week">
-      <li class="day">{{ week }}</li>
+      <li class="day">
+        <slot name="week" :li="week">{{ week }}</slot>
+      </li>
     </template>
     <div class="hr"></div>
     <template v-for="(li, index) in list" :key="index">
       <li @click="onChange(li)" class="day" :class="{ gary: li.type !== 'current' }">
-        {{ li.day }}
+        <slot :li="li">{{ li.day }}</slot>
       </li>
     </template>
   </ul>
