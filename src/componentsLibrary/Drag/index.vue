@@ -1,23 +1,39 @@
 <template>
-  <div class="dht-drag">{{ ceshi }}</div>
+  <div
+    @drop="ondrop"
+    @drag="ondrag"
+    @dragend="ondragend"
+    @dragenter="ondragenter"
+    @dragexit="ondragexit"
+    @dragleave="ondragleave"
+    @dragover="ondragover"
+    @dragstart="ondragstart"
+    :draggable="draggable"
+    class="dht-drag"
+    :style="{ cursor: draggable ? 'move' : 'default' }"
+  >
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent } from 'vue'
-
+import { defineComponent } from 'vue'
+import drag from './drag'
+import { SetupContext } from '@vue/runtime-core'
 export default defineComponent({
   name: 'DhtDrag',
-  setup(props, ctx) {
-    const data = reactive({
-      ceshi: 1321,
-    })
-
-    function start() {
-      console.log(data)
-    }
-
+  emits: ['drag', 'dragend', 'dragenter', 'dragexit', 'dragleave', 'dragover', 'dragstart'],
+  props: {
+    // 绑定的数据类型，因为可能很多，所以就全写上去
+    modelValue: [String, Number, Object, Array, Boolean, Date, Function, Symbol, Promise],
+    draggable: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  setup(props, ctx: SetupContext) {
     return {
-      ...toRefs(data),
+      ...drag(props, ctx as SetupContext),
     }
   },
 })

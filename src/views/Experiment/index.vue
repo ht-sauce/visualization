@@ -1,35 +1,21 @@
 <template>
   <div class="experiment">
-    <test-com>
-      <template #default="de">{{ de }}</template>
-    </test-com>
-    <test-a></test-a>
-    <NoDcom test="测试props" />
-    <div>
-      <slot></slot>
-    </div>
-    <div>
-      <slot name="name"></slot>
-    </div>
+    <dht-drag>
+      <div class="drag-one">可拖动1</div>
+    </dht-drag>
+    <dht-drag>
+      <div class="drag-two">可拖动2</div>
+    </dht-drag>
   </div>
 </template>
 
 <script lang="tsx">
 import { defineComponent, reactive, ref, toRefs } from 'vue'
-import { TestCom } from './Test'
-import NoDcom from './NoDcom'
-
-const TestA = () => <div>fdsafdsa</div>
 
 export default defineComponent({
-  components: { TestCom, TestA, NoDcom },
   setup(props, ctx) {
-    const dateone = ref('测试')
-    const datetwo = reactive({
-      test: '测试',
-    })
+    const datetwo = reactive({})
     return {
-      dateone,
       ...toRefs(datetwo),
     }
   },
@@ -42,5 +28,12 @@ export default defineComponent({
   flex-flow: column;
   align-items: center;
   justify-content: center;
+}
+.drag-one,
+.drag-two {
+  width: 100px;
+  height: 100px;
+  background: #1890ff;
+  margin: 20px;
 }
 </style>
