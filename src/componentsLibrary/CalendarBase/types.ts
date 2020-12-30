@@ -20,4 +20,5 @@ export interface ListType {
   day: number
   week: number
   type: ListTypeEnum //存在back,current,next
+  formatDate?: string
 }

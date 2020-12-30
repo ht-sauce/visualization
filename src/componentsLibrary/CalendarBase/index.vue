@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from 'vue'
 import CalendarTool from './tool'
-import { ListType, YMD } from './types'
+import { ListType, YMD, ListTypeEnum } from './types'
 export default defineComponent({
   name: 'CalendarBase',
   emits: ['change'],
@@ -61,8 +61,39 @@ export default defineComponent({
       },
     )
 
+    // 是否补0前缀
+    function isZero(num: number | string) {
+      const newNum = num.toString()
+      return newNum.length >= 2 ? newNum : '0' + newNum
+    }
+    // 日期格式化
+    function formatDate(e: ListType) {
+      let month = props.month
+      let year = props.year
+      const day = e.day
+      if (e.type === ListTypeEnum.back) {
+        if (month - 1 < 1) {
+          year = year - 1
+          month = 12
+        } else {
+          month = month - 1
+        }
+      }
+      if (e.type === ListTypeEnum.next) {
+        if (month + 1 > 12) {
+          year = year + 1
+          month = 1
+        } else {
+          month = month + 1
+        }
+      }
+      e.formatDate = `${year}-${isZero(month)}-${isZero(day)}`
+      return e
+    }
+
     function onChange(e: ListType) {
-      ctx.emit('change', e)
+      const newE = formatDate(e)
+      ctx.emit('change', newE)
     }
 
     return {
