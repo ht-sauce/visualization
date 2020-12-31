@@ -13,7 +13,7 @@ export default defineComponent({
     function startmove() {
       console.log()
     }
-    function stopmove(e) {
+    function stopmove(e: any) {
       const { left, top } = e
       console.log(left, top)
     }

@@ -22,18 +22,18 @@
   }
 
   .tooltip[data-popper-placement^='top'] > .arrow {
-    bottom: -8px;
+    bottom: -4px;
   }
 
   .tooltip[data-popper-placement^='bottom'] > .arrow {
-    top: -8px;
+    top: -4px;
   }
 
   .tooltip[data-popper-placement^='left'] > .arrow {
-    right: -8px;
+    right: -4px;
   }
 
   .tooltip[data-popper-placement^='right'] > .arrow {
-    left: -8px;
+    left: -4px;
   }
 }

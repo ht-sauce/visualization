@@ -1,8 +1,6 @@
 <template>
   <div class="experiment">
-    <dht-float-win>
-      <div class="drag-one">可拖动1</div>
-    </dht-float-win>
+    <dht-cascade></dht-cascade>
   </div>
 </template>
 

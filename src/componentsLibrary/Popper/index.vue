@@ -3,6 +3,7 @@ import { dataType, visibility } from './types'
 import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { Instance, Options } from '@popperjs/core'
+
 import ClickOutside from '../ClickOutside'
 export default defineComponent({
   name: 'DhtPopper',
@@ -57,7 +58,7 @@ export default defineComponent({
     function mergeOptions() {
       const opt = {
         placement: props.placement,
-        ...props.options,
+        ...(props?.options ? props.options : {}),
       } as Options
       const modifiers = []
 
@@ -68,7 +69,10 @@ export default defineComponent({
         },
       })
 
-      opt.modifiers = [...modifiers]
+      const optModifiers = opt.modifiers ? opt.modifiers : []
+
+      opt.modifiers = [...optModifiers, ...modifiers]
+      //console.log(opt)
       return opt
     }
 

@@ -10,6 +10,7 @@ import DhtIcon from './Icon'
 import DhtButton from './Button'
 import CalendarBase from './CalendarBase'
 import FloatWin from './FloatWin'
+import Cascade from './Cascade'
 // 指令类插件
 import DhtClickOutside from './ClickOutside'
 import DhtCopy from './Copy'
@@ -27,6 +28,7 @@ const component = [
   DhtIcon,
   DhtButton,
   CalendarBase,
+  Cascade,
 ]
 
 const defaultInstallOpt = {
