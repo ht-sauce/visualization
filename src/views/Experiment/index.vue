@@ -10,14 +10,11 @@
 </template>
 
 <script lang="tsx">
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup(props, ctx) {
-    const datetwo = reactive({})
-    return {
-      ...toRefs(datetwo),
-    }
+    return {}
   },
 })
 </script>

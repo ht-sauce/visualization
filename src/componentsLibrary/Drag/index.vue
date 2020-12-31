@@ -22,10 +22,13 @@ import drag from './drag'
 import { SetupContext } from '@vue/runtime-core'
 export default defineComponent({
   name: 'DhtDrag',
-  emits: ['drag', 'dragend', 'dragenter', 'dragexit', 'dragleave', 'dragover', 'dragstart'],
+  emits: ['drag', 'dragend', 'dragenter', 'dragexit', 'dragleave', 'dragover', 'dragstart', 'drop'],
   props: {
     // 绑定的数据类型，因为可能很多，所以就全写上去
-    modelValue: [String, Number, Object, Array, Boolean, Date, Function, Symbol, Promise],
+    modelValue: {
+      type: [String, Number, Object, Array, Boolean, Date, Function, Symbol, Promise],
+      default: null,
+    },
     draggable: {
       type: Boolean,
       default: true,
