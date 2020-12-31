@@ -1,5 +1,5 @@
 <template>
-  <ul class="calendar-base">
+  <ul class="dht-calendar-base">
     <template v-for="week in weeks" :key="week">
       <li class="day">
         <slot name="week" :li="week">{{ week }}</slot>

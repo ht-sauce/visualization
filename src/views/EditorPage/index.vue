@@ -1,7 +1,5 @@
 <template>
-  <div class="editor-page">
-    <dht-popup></dht-popup>
-  </div>
+  <div class="editor-page"></div>
 </template>
 
 <script lang="ts">
@@ -10,8 +8,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup() {
     const open = () => {
-      // 打开一个新窗口
-      // window.open('https://www.baidu.com/', 'ceshi', 'width=600,height=300,top=100%,left=100%')
+      console.log(1111)
     }
 
     return {
@@ -23,7 +20,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .editor-page {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 </style>

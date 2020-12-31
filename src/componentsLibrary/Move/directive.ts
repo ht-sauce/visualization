@@ -17,7 +17,15 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
   const pdom = dragBox.parentNode as HTMLElement
   //boundary && (pdom.style.position = 'relative')
   // 回调函数定义
-  let callback = (arg: any) => {
+  let callback = <T>(arg: T) => {
+    return null
+  }
+  // 移动开始
+  let callstart = <T>(arg: T) => {
+    return null
+  }
+  // 移动结束
+  let callstop = <T>(arg: T) => {
     return null
   }
   if (typeof binding.value === 'function') {
@@ -25,6 +33,8 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
   }
   if (typeof binding.value === 'object') {
     callback = binding.value?.callback ? binding.value.callback : callback
+    callstart = binding.value?.callstart ? binding.value.callstart : callstart
+    callstop = binding.value?.callstop ? binding.value.callstop : callstop
   }
 
   // 父元素宽高
@@ -58,6 +68,8 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
     }
   }
   return {
+    callstart,
+    callstop,
     callback,
     boundary,
     pw,
@@ -89,7 +101,10 @@ const Move = {
     dragBox.customOffsetLeft = el.offsetLeft
     dragBox.customOffsetHeight = el.offsetHeight
 
-    const { callback, maxw, maxh, minw, minh, x, y } = paramsHandler(dragBox, binding)
+    const { callstart, callstop, callback, maxw, maxh, minw, minh, x, y } = paramsHandler(
+      dragBox,
+      binding,
+    )
 
     dragBox.onmousedown = (e) => {
       // 阻止默认事件，避免元素选中
@@ -101,14 +116,18 @@ const Move = {
       const disX = e.x - dragBox.offsetLeft
       const disY = e.y - dragBox.offsetTop
 
+      let left = 0,
+        top = 0,
+        // 相对于父元素百分比
+        percentX = 0,
+        percentY = 0
+
+      callstart(true)
       document.onmousemove = (e2) => {
         dragBox.style.transition = ''
         //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-        let left = e2.clientX - disX
-        let top = e2.clientY - disY
-        // 相对于父元素的移动百分比
-        let percentX = 0
-        let percentY = 0
+        left = e2.clientX - disX
+        top = e2.clientY - disY
         // 当传入true代表控制边界
         if (boundary) {
           left = left > maxw ? maxw : left < minw ? minw : left
@@ -132,6 +151,7 @@ const Move = {
         document.onmousemove = null
         document.onmouseup = null
         dragBox.style.cursor = 'default'
+        callstop({ left, top, percentX, percentY, minX: minw, minY: minh, maxX: maxw, maxY: maxh })
       }
     }
   },

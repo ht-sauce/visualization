@@ -9,7 +9,7 @@
     :click-outside="clickOutside"
   >
     <template #tooltip>
-      <div class="color-picker">
+      <div class="dht-color-picker">
         <!--固定颜色部分-->
         <!--<ul class="fixed-color">
           <template v-for="(color, index) in fixedColors" :key="index">
@@ -64,15 +64,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, watch, computed } from 'vue'
+import { defineComponent, reactive, toRefs, computed } from 'vue'
 import { DhtPopper } from '../Popper'
-import { hsv2rgb, rgb2hsv, hsv2hsl, hsl2hsv, hex2rgb, rgb2hex, parseColor } from './color'
+import { hsv2rgb, hsv2hsl, rgb2hex } from './color'
 import { Vmoves } from './types'
-
+import DhtMove from '../Move'
 export default defineComponent({
   name: 'DhtColorPicker',
   components: {
     DhtPopper,
+  },
+  directives: {
+    DhtMove: DhtMove.directive,
   },
   emits: ['update:modelValue', 'confirm'],
   props: {

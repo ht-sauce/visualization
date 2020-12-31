@@ -1,18 +1,15 @@
 <template>
   <div class="experiment">
-    <dht-drag>
+    <dht-float-win>
       <div class="drag-one">可拖动1</div>
-    </dht-drag>
-    <dht-drag>
-      <div class="drag-two">可拖动2</div>
-    </dht-drag>
+    </dht-float-win>
   </div>
 </template>
 
 <script lang="tsx">
-import { defineComponent } from 'vue'
-
+import { defineComponent, ref } from 'vue'
 export default defineComponent({
+  components: {},
   setup(props, ctx) {
     return {}
   },
@@ -31,6 +28,5 @@ export default defineComponent({
   width: 100px;
   height: 100px;
   background: #1890ff;
-  margin: 20px;
 }
 </style>
