@@ -36,19 +36,18 @@ export default defineComponent({
           {
             name: 'arrow',
             phase: 'main',
-            options: {},
             data: {
               x: 10,
             },
             fn: ({ state }: ModifierArguments<Options>) => {
-              const { modifiersData, elements } = state as State
-              const { reference, arrow } = elements
-              const referencecopy = reference as HTMLElement
-              console.log(modifiersData)
+              // const { modifiersData, elements } = state as any
+              // const { reference, arrow } = elements
+              // const referencecopy = reference as HTMLElement
+              // console.log(modifiersData)
               // const x = modifiersData.arrow.x ? modifiersData.arrow.x : 0
               //
               // modifiersData.arrow.x =
-              //   x - (referencecopy.clientWidth - (arrow as HTMLElement).clientWidth) / 2 + 20
+              //   x - (referencecopy.clientWidth - (arrow as HTMLElement).clientWidth) / 2
             },
           },
         ],
