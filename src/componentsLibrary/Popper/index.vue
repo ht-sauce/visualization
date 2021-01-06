@@ -127,6 +127,9 @@ export default defineComponent({
         if (e) show()
         else hide()
       },
+      {
+        immediate: true,
+      },
     )
 
     function clickOutside() {

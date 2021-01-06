@@ -9,7 +9,8 @@ export default defineComponent({
   emits: [],
   props: {},
   setup(props, ctx) {
-    //const Movedata = reactive({ x: 0, y: 0 })
+    const Movedata = reactive({ x: 0, y: 0 })
+    //console.log(window.innerWidth, window.innerHeight)
     function startmove() {
       console.log()
     }
@@ -19,7 +20,15 @@ export default defineComponent({
     }
 
     return () => (
-      <div class="dht-float-win" v-dht-move={{ callmove: startmove, callstop: stopmove }}>
+      <div
+        v-dht-move={{
+          callmove: startmove,
+          callstop: stopmove,
+          pwin: true,
+          // x: 100,
+          // y: 100,
+        }}
+      >
         {ctx.slots.default && ctx.slots.default()}
       </div>
     )

@@ -1,13 +1,13 @@
 import { DirectiveBinding } from 'vue'
 
 interface HTMLElementCopy extends HTMLElement {
-  customOffsetLeft: number
-  customOffsetHeight: number
   isMove: boolean
 }
 
 function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
-  const boundary = binding.modifiers?.boundary ?? false // 是否控制边界
+  const boundary = binding.value?.boundary ?? false // 是否控制边界
+  // 是否根据window的范围进行移动,注意和boundary参数是互斥使用的
+  const pwin = binding.value?.pwin ?? false
   //加入偏量值会导致负数出现
   const deviationX = binding.value?.deviationX ?? 0
   const deviationY = binding.value?.deviationY ?? 0
@@ -38,14 +38,14 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
   }
 
   // 父元素宽高
-  const pw = pdom.offsetWidth + deviationX
-  const ph = pdom.offsetHeight + deviationY
+  const pw = pwin ? window.innerWidth - 1 : pdom.offsetWidth + deviationX
+  const ph = pwin ? window.innerHeight : pdom.offsetHeight + deviationY
   // 本身宽高
   const sw = dragBox.offsetWidth
-  const sh = dragBox.offsetHeight * 2 // 在控制父边界情况下避免元素超出范围
+  const sh = dragBox.offsetHeight // 在控制父边界情况下避免元素超出范围
   // 计算得到最大移动距离
-  const maxw = pw - sw + dragBox.customOffsetLeft
-  const maxh = ph - sh + dragBox.customOffsetHeight
+  const maxw = pw - sw //+ dragBox.customOffsetLeft
+  const maxh = ph - sh //+ dragBox.customOffsetHeight
   const minw = -deviationX
   const minh = -deviationY
 
@@ -55,17 +55,16 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
   let mx = null,
     my = null
   if (typeof binding.value === 'object') {
-    mx = binding.value.x
-    my = binding.value.y
+    mx = binding.value.x ?? 0
+    my = binding.value.y ?? 0
   }
-  if (boundary && !dragBox.isMove) {
+  if (!dragBox.isMove) {
     dragBox.style.transition = 'top 0.3s, left 0.3s'
-    if (typeof mx === 'number' && x) {
-      dragBox.style.left = (mx / 100) * maxw + 'px'
-    }
-    if (typeof my === 'number' && y) {
-      dragBox.style.top = (my / 100) * maxh + 'px'
-    }
+    const left = (boundary ? (mx / 100) * maxw : mx) + 'px'
+    const top = (boundary ? (my / 100) * maxh : my) + 'px'
+
+    if (typeof mx === 'number' && x) dragBox.style.left = left
+    if (typeof my === 'number' && y) dragBox.style.top = top
   }
   return {
     callstart,
@@ -84,13 +83,14 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
     y,
     mx,
     my,
+    pwin,
   }
 }
 
 const Move = {
   // 绑定元素的父组件挂载时调用
   mounted(el: HTMLElementCopy, binding: DirectiveBinding) {
-    const boundary = binding.modifiers?.boundary ?? false // 是否控制边界
+    const boundary = binding.value?.boundary ?? false // 是否控制边界
     const dragBox = el //获取当前元素
     // 绑定元素设置
     dragBox.style.position = 'absolute'
@@ -98,10 +98,8 @@ const Move = {
     const pdom = dragBox.parentNode as HTMLElement
     // 支持边界控制情况下
     boundary && (pdom.style.position = 'relative')
-    dragBox.customOffsetLeft = el.offsetLeft
-    dragBox.customOffsetHeight = el.offsetHeight
 
-    const { callstart, callstop, callback, maxw, maxh, minw, minh, x, y } = paramsHandler(
+    const { pwin, callstart, callstop, callback, maxw, maxh, minw, minh, x, y } = paramsHandler(
       dragBox,
       binding,
     )
@@ -129,7 +127,7 @@ const Move = {
         left = e2.clientX - disX
         top = e2.clientY - disY
         // 当传入true代表控制边界
-        if (boundary) {
+        if (boundary || pwin) {
           left = left > maxw ? maxw : left < minw ? minw : left
           top = top > maxh ? maxh : top < minh ? minh : top
           // 计算移动百分比

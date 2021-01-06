@@ -23,7 +23,8 @@
         <div class="color-board">
           <div class="board" :style="{ background: `hsl(${hsv.h}, 100%, 50%)` }">
             <span
-              v-dht-move.boundary="{
+              v-dht-move="{
+                boundary: true,
                 callback: boardPoint,
                 x: boardSelPonit.x,
                 y: boardSelPonit.y,
@@ -33,7 +34,7 @@
           </div>
           <div class="color-adjust">
             <span
-              v-dht-move.boundary="{ callback: colorSlider, x: colorx }"
+              v-dht-move="{ boundary: true, callback: colorSlider, x: colorx }"
               class="color-slider"
             ></span>
           </div>
@@ -46,7 +47,7 @@
             }"
           >
             <span
-              v-dht-move.boundary="{ callback: alphaSlider, x: alphax }"
+              v-dht-move="{ boundary: true, callback: alphaSlider, x: alphax }"
               class="alpha-slider"
             ></span>
           </div>
