@@ -1,9 +1,5 @@
 import { DirectiveBinding } from 'vue'
-
-interface HTMLElementCopy extends HTMLElement {
-  isMove: boolean
-}
-
+import { HTMLElementCopy, VmoveCallData } from './types'
 function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
   const boundary = binding.value?.boundary ?? false // 是否控制边界
   // 是否根据window的范围进行移动,注意和boundary参数是互斥使用的
@@ -39,7 +35,7 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
 
   // 父元素宽高
   const pw = pwin ? window.innerWidth - 1 : pdom.offsetWidth + deviationX
-  const ph = pwin ? window.innerHeight : pdom.offsetHeight + deviationY
+  const ph = pwin ? window.innerHeight - 1 : pdom.offsetHeight + deviationY
   // 本身宽高
   const sw = dragBox.offsetWidth
   const sh = dragBox.offsetHeight // 在控制父边界情况下避免元素超出范围
@@ -62,7 +58,6 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
     dragBox.style.transition = 'top 0.3s, left 0.3s'
     const left = (boundary ? (mx / 100) * maxw : mx) + 'px'
     const top = (boundary ? (my / 100) * maxh : my) + 'px'
-
     if (typeof mx === 'number' && x) dragBox.style.left = left
     if (typeof my === 'number' && y) dragBox.style.top = top
   }
@@ -86,7 +81,6 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding) {
     pwin,
   }
 }
-
 const Move = {
   // 绑定元素的父组件挂载时调用
   mounted(el: HTMLElementCopy, binding: DirectiveBinding) {
@@ -99,17 +93,26 @@ const Move = {
     // 支持边界控制情况下
     boundary && (pdom.style.position = 'relative')
 
-    const { pwin, callstart, callstop, callback, maxw, maxh, minw, minh, x, y } = paramsHandler(
-      dragBox,
-      binding,
-    )
+    const {
+      pwin,
+      callstart,
+      callstop,
+      callback,
+      maxw,
+      maxh,
+      minw,
+      minh,
+      x,
+      y,
+      sw,
+      sh,
+    } = paramsHandler(dragBox, binding)
 
     dragBox.onmousedown = (e) => {
       // 阻止默认事件，避免元素选中
       e.preventDefault()
       dragBox.isMove = true
       dragBox.style.cursor = 'move'
-
       //算出鼠标当前相对元素的位置
       const disX = e.x - dragBox.offsetLeft
       const disY = e.y - dragBox.offsetTop
@@ -119,8 +122,8 @@ const Move = {
         // 相对于父元素百分比
         percentX = 0,
         percentY = 0
-
       callstart(true)
+
       document.onmousemove = (e2) => {
         dragBox.style.transition = ''
         //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
@@ -136,12 +139,22 @@ const Move = {
           percentY = Number(((top / maxh) * 100).toFixed(0))
           percentY = isNaN(percentY) ? 0 : percentY
         }
-
         //移动当前元素
         x && (dragBox.style.left = left + 'px')
         y && (dragBox.style.top = top + 'px')
 
-        callback({ left, top, percentX, percentY, minX: minw, minY: minh, maxX: maxw, maxY: maxh })
+        callback({
+          left,
+          top,
+          percentX,
+          percentY,
+          minX: minw,
+          minY: minh,
+          maxX: maxw,
+          maxY: maxh,
+          selfWidth: sw,
+          selfHeight: sh,
+        } as VmoveCallData)
       }
       document.onmouseup = (updom) => {
         //鼠标弹起来的时候不再移动
@@ -149,7 +162,18 @@ const Move = {
         document.onmousemove = null
         document.onmouseup = null
         dragBox.style.cursor = 'default'
-        callstop({ left, top, percentX, percentY, minX: minw, minY: minh, maxX: maxw, maxY: maxh })
+        callstop({
+          left,
+          top,
+          percentX,
+          percentY,
+          minX: minw,
+          minY: minh,
+          maxX: maxw,
+          maxY: maxh,
+          selfWidth: sw,
+          selfHeight: sh,
+        } as VmoveCallData)
       }
     }
   },

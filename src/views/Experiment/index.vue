@@ -1,7 +1,7 @@
 <template>
   <div class="experiment">
     <dht-float-win>
-      <span class="drag-one">12313</span>
+      <div class="drag-one">12313</div>
     </dht-float-win>
     <dht-color-picker v-model="show">
       <span class="drag-two">12313</span>
