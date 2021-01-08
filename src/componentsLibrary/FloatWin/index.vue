@@ -1,9 +1,10 @@
 <script lang="tsx">
-import { defineComponent, PropType, reactive, getCurrentInstance } from 'vue'
+import { defineComponent, getCurrentInstance, PropType, reactive } from 'vue'
 import DhtMove from '../Move'
 import { VmoveCallData } from '../Move/types'
 import { DirectionEnum } from './Types'
 import { ComponentInternalInstance } from '@vue/runtime-core'
+
 interface CallData extends VmoveCallData {
   direction?: DirectionEnum
 }
@@ -46,12 +47,16 @@ export default defineComponent({
     function startmove() {
       ctx.emit('start')
     }
+
     function stopmove(callData: VmoveCallData) {
       const { percentX, percentY } = callData
-      let direction: DirectionEnum // 移动方向
+
+      if (percentX === percentY) return null // 未发生移动则无任何操作
+
+      let direction = DirectionEnum.left // 移动方向
       // x移动大于y，则左右移动
       if (percentX > percentY) direction = percentX > 50 ? DirectionEnum.right : DirectionEnum.left
-      else direction = percentY > 50 ? DirectionEnum.bottom : DirectionEnum.top
+      if (percentX < percentY) direction = percentY > 50 ? DirectionEnum.bottom : DirectionEnum.top
 
       const [top, bottom, left, right] = props.tblr
       // 方向控制只支持上下左右单个、上下模式、左右模式、全判断模式：全false
@@ -61,6 +66,9 @@ export default defineComponent({
       if (right) direction = DirectionEnum.right
       if (top && bottom) direction = percentY > 50 ? DirectionEnum.bottom : DirectionEnum.top
       if (left && right) direction = percentX > 50 ? DirectionEnum.right : DirectionEnum.left
+
+      // 最后判断，避免参数一样，导致默认变成left
+      //if (percentX === percentY) direction = oldDirection
 
       autoMove(direction, callData)
     }

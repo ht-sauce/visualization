@@ -23,7 +23,7 @@ function eventBind(el: HTMLElementCopy, binding: DirectiveBinding) {
   if (IsPhone()) {
     // 手机端
     el.ontouchstart = () => {
-      el.settime = setTimeout(() => callback(el, binding), time)
+      el.settime = setTimeout(() => callback(el), time)
     }
     el.ontouchend = () => {
       el.settime && clearTimeout(el.settime)
@@ -31,7 +31,7 @@ function eventBind(el: HTMLElementCopy, binding: DirectiveBinding) {
   } else {
     // pc端
     el.onmousedown = () => {
-      el.settime = setTimeout(() => callback(el, binding), time)
+      el.settime = setTimeout(() => callback(el), time)
     }
     el.onmouseup = () => {
       el.settime && clearTimeout(el.settime)

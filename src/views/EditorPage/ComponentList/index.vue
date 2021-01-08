@@ -1,15 +1,27 @@
 <template>
-  <dht-float-win :y="60" :pwin="true" :boundary="false" :tblr="[false, false, true, true]">
-    <div class="component-list">可选组件列表</div>
-  </dht-float-win>
+  <float-drawer :y="50" :x="x" v-model="show" title="业务组件列表">
+    <div class="component-list">业务组件列表</div>
+  </float-drawer>
 </template>
 
 <script>
-import { computed, reactive, toRefs } from 'vue'
-
+import { reactive, toRefs } from 'vue'
+import FloatDrawer from '@/componentsBusiness/FloatDrawer/index'
 export default {
-  setup() {
-    const data = reactive({})
+  emit: ['update:modelValue'],
+  components: {
+    FloatDrawer,
+  },
+  props: {
+    modelValue: Boolean,
+    title: String,
+  },
+  setup(props, ctx) {
+    const data = reactive({
+      show: false,
+      x: window.innerWidth - 110,
+    })
+
     return {
       ...toRefs(data),
     }
@@ -19,17 +31,5 @@ export default {
 
 <style scoped lang="scss">
 .component-list {
-  $lw: 55px;
-  width: $lw * 2;
-  height: $lw * 0.8;
-  background: $primary-color;
-  box-shadow: $box-shadow;
-  color: $white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    background: $primary-5;
-  }
 }
 </style>

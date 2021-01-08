@@ -12,8 +12,8 @@ import LayoutList from './LayoutList/index.vue'
 import ComponentList from './ComponentList/index.vue'
 export default defineComponent({
   components: {
-    LayoutList,
     ComponentList,
+    LayoutList,
   },
   setup() {
     const data = reactive({
