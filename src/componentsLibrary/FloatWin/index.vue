@@ -1,8 +1,9 @@
 <script lang="tsx">
-import { defineComponent, PropType, reactive } from 'vue'
+import { defineComponent, PropType, reactive, getCurrentInstance } from 'vue'
 import DhtMove from '../Move'
 import { VmoveCallData } from '../Move/types'
 import { DirectionEnum } from './Types'
+import { ComponentInternalInstance } from '@vue/runtime-core'
 interface CallData extends VmoveCallData {
   direction?: DirectionEnum
 }
@@ -13,6 +14,7 @@ export default defineComponent({
   },
   emits: ['start', 'stop'],
   props: {
+    disabled: Boolean, // 是否禁用
     x: {
       type: Number,
       default: 0,
@@ -38,6 +40,7 @@ export default defineComponent({
     },
   },
   setup(props, ctx) {
+    const { proxy } = getCurrentInstance() as ComponentInternalInstance
     const Movedata = reactive({ x: props.x, y: props.y })
 
     function startmove() {
@@ -84,8 +87,10 @@ export default defineComponent({
           x = pwin ? maxX : boundary ? 100 : 0
           break
       }
+
       Movedata.x = x
       Movedata.y = y
+      proxy && proxy.$forceUpdate() // 和上一次参数一样会导致响应式依赖不会更新
       ctx.emit('stop', callData)
     }
 
@@ -98,6 +103,7 @@ export default defineComponent({
           boundary: props.boundary,
           x: Movedata.x,
           y: Movedata.y,
+          disabled: props.disabled,
         }}
       >
         {ctx.slots.default && ctx.slots.default()}

@@ -1,18 +1,31 @@
 <template>
+  <!--页面组件编辑功能-->
+  <LayoutList />
+  <ComponentList />
+  <!--页面编辑区域-->
   <div class="editor-page"></div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-
+import { defineComponent, reactive } from 'vue'
+import LayoutList from './LayoutList/index.vue'
+import ComponentList from './ComponentList/index.vue'
 export default defineComponent({
+  components: {
+    LayoutList,
+    ComponentList,
+  },
   setup() {
+    const data = reactive({
+      show: true,
+    })
     const open = () => {
       console.log(1111)
     }
 
     return {
       open,
+      data,
     }
   },
 })

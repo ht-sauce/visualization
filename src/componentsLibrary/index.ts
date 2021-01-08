@@ -15,8 +15,9 @@ import Cascade from './Cascade'
 import DhtClickOutside from './ClickOutside'
 import DhtCopy from './Copy'
 import DhtMove from './Move'
+import Longpress from './Longpress'
 
-const plugins = [DhtClickOutside, DhtCopy, DhtMove]
+const plugins = [DhtClickOutside, DhtCopy, DhtMove, Longpress]
 
 // 批量注册列表
 const component = [

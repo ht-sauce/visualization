@@ -1,5 +1,5 @@
 @import "../fuc/generateColor.scss";
-
+// 该页面样式必须在外部使用之后才可以使用
 // color palettes
 $blue-6: #1890ff;
 $blue-1: generateColor($blue-6, 5, true);
@@ -90,15 +90,15 @@ $blue-9: generateColor($yellow-6, 3, false);
 $blue-10: generateColor($yellow-6, 4, false);
 
 $volcano-6: #fa541c;
-$blue-1: generateColor($yellow-6, 5, true);
-$blue-2: generateColor($yellow-6, 4, true);
-$blue-3: generateColor($yellow-6, 3, true);
-$blue-4: generateColor($yellow-6, 2, true);
-$blue-5: generateColor($yellow-6, 1, true);
-$blue-7: generateColor($yellow-6, 1,false);
-$blue-8: generateColor($yellow-6, 2, false);
-$blue-9: generateColor($yellow-6, 3, false);
-$blue-10: generateColor($yellow-6, 4, false);
+$blue-1: generateColor($volcano-6, 5, true);
+$blue-2: generateColor($volcano-6, 4, true);
+$blue-3: generateColor($volcano-6, 3, true);
+$blue-4: generateColor($volcano-6, 2, true);
+$blue-5: generateColor($volcano-6, 1, true);
+$blue-7: generateColor($volcano-6, 1,false);
+$blue-8: generateColor($volcano-6, 2, false);
+$blue-9: generateColor($volcano-6, 3, false);
+$blue-10: generateColor($volcano-6, 4, false);
 
 $geekblue-6: #2f54eb;
 $blue-1: generateColor($geekblue-6, 5, true);

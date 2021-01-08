@@ -28,6 +28,7 @@
 // 功能定位，只负责弹窗，没有额外的业务逻辑混杂
 import { defineComponent, watch, reactive, toRefs, computed, PropType, nextTick } from 'vue'
 import { globalConfig } from '@/componentsLibrary/tool/tool'
+import { directionTypes } from './Types'
 export default defineComponent({
   name: 'DhtPopup',
   emits: ['update:modelValue', 'close'],
@@ -36,7 +37,7 @@ export default defineComponent({
     zIndex: Number,
     direction: {
       // 出现的位置
-      type: String,
+      type: String as PropType<directionTypes>,
       default: 'center', // center、top、bottom、right、left、
     },
     // 关闭之前的事件，传入则控制关闭，和elementUI同理

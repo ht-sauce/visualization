@@ -14,4 +14,26 @@ interface VmoveCallData {
   selfWidth: number // 元素本身宽高
   selfHeight: number
 }
-export { HTMLElementCopy, VmoveCallData }
+
+interface REparamsHandler {
+  callstart: <T>(arg: T) => null
+  callstop: <T>(arg: T) => null
+  callback: <T>(arg: T) => null
+  boundary: boolean
+  pw: number
+  ph: number
+  sw: number
+  sh: number
+  maxw: number
+  maxh: number
+  minw: number
+  minh: number
+  isX: boolean
+  isY: boolean
+  mx: number
+  my: number
+  pwin: number
+  disabled: boolean
+}
+
+export { HTMLElementCopy, VmoveCallData, REparamsHandler }
