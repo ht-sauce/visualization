@@ -8,3 +8,8 @@ export const globalConfig = (): InstallOptions => {
   }
   return {} as InstallOptions
 }
+
+// 判断是否手机端
+export const IsPhone = () => {
+  return /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
+}
