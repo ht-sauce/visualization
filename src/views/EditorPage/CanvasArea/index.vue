@@ -1,9 +1,9 @@
 <template>
   <dht-drag class="canvas-area" @drop="onCanvas">
     <template #default>
-      <template v-for="(item, index) in components" :key="item.id">
-        <dht-drag :model-value="index" @drop="onAssemblyDrop">
-          <component :is="item.name">{{ index }}</component>
+      <template v-for="(item, index) in components" :key="index">
+        <dht-drag :model-value="{ type: 'canvas', data: index }" @drop="onAssemblyDrop">
+          <component :is="item.name">按钮{{ item.id }}</component>
         </dht-drag>
       </template>
     </template>
@@ -13,6 +13,7 @@
 <script lang="ts">
 import { reactive, defineComponent, toRefs } from 'vue'
 import { CallData, ComponentsItem } from './Types'
+import { DragDataType } from '../Type'
 export default defineComponent({
   props: {},
   setup() {
@@ -22,15 +23,26 @@ export default defineComponent({
     const components = reactive([] as ComponentsItem[])
     // 画布区域接收
     function onCanvas(CallData: CallData) {
-      if (!CallData.modelValue) return null
+      if (CallData.modelValue.type !== DragDataType.layout) return null
+
       components.push({
         id: components.length + 1,
-        name: CallData.modelValue as string,
+        name: CallData.modelValue.data,
       })
     }
-    // 子项移动接收数据
+    // 子项移动接收数据,属于内部布局元素位置变化
     function onAssemblyDrop(CallData: CallData) {
-      console.log(CallData)
+      if (CallData.modelValue.type !== DragDataType.canvas) return null
+
+      const bindData = CallData.modelValue
+      const startIndex: number = Number(bindData.data)
+      const startItem = components[startIndex]
+
+      const endIndex = Number(CallData.endData.data)
+      const endItem = components[endIndex]
+
+      components.splice(endIndex, 1, startItem) // 放过去
+      components.splice(startIndex, 1, endItem) // 反过来
     }
 
     return {

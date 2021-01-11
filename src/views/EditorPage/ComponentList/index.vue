@@ -2,7 +2,7 @@
   <float-drawer :y="50" :x="x" v-model="show" title="业务组件列表">
     <div class="component-list">
       <template v-for="item in ComponentList" :key="item">
-        <dht-drag :model-value="item">
+        <dht-drag :model-value="handlerModelValue(item)">
           <component :is="item"></component>
         </dht-drag>
       </template>
@@ -13,6 +13,7 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import FloatDrawer from '@/componentsBusiness/FloatDrawer/index'
+import { DragDataType } from '@/views/EditorPage/Type'
 export default {
   emit: ['update:modelValue'],
   components: {
@@ -30,8 +31,17 @@ export default {
       ComponentList: ['dht-button'],
     })
 
+    // 处理绑定的数据类型
+    function handlerModelValue(data) {
+      return {
+        type: DragDataType.business,
+        data: data,
+      }
+    }
+
     return {
       ...toRefs(data),
+      handlerModelValue,
     }
   },
 }
