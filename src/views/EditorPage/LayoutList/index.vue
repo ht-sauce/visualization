@@ -1,4 +1,5 @@
 <template>
+  <!--布局组件随着需求要求，把页面进行拆分，然后实现特定的布局组件-->
   <float-drawer :x="x" v-model="show" title="布局组件列表">
     <div class="layout-list">
       <template v-for="item in LayoutList" :key="item">

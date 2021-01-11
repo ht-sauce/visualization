@@ -12,7 +12,7 @@
     </div>
   </dht-float-win>
   <!--布局组件展示部分-->
-  <dht-popup :modelValue="modelValue" :mask="false" ToBody :direction="direction">
+  <dht-popup :modelValue="modelValue" :mask="false" ToBody :direction="directionIn">
     <div class="float-drawer-popup">
       <div class="header">
         <span class="title">{{ title }}</span>
@@ -40,15 +40,19 @@ export default {
       type: Number,
       default: 0,
     },
+    // 初始位置
     direction: {
       type: String,
       default: 'right',
     },
   },
   setup(props, ctx) {
+    const data = reactive({
+      directionIn: props.direction,
+    })
     function floatStop(callData) {
       const { direction } = callData
-      ctx.emit('update:direction', direction)
+      data.directionIn = direction
     }
 
     function isShow() {
@@ -56,6 +60,7 @@ export default {
     }
 
     return {
+      ...toRefs(data),
       floatStop,
       isShow,
     }

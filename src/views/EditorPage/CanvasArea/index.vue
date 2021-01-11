@@ -1,9 +1,14 @@
 <template>
+  <!--画布设置-->
+  <CanvasSet />
+  <!--主渲染区域-->
   <dht-drag class="canvas-area" @drop="onCanvas">
     <template #default>
       <template v-for="(item, index) in components" :key="index">
         <dht-drag :model-value="{ type: 'canvas', data: index }" @drop="onAssemblyDrop">
-          <component :is="item.name">按钮{{ item.id }}</component>
+          <right-mouse-button :modelValue="index" :name="item.name">
+            按钮{{ item.id }}
+          </right-mouse-button>
         </dht-drag>
       </template>
     </template>
@@ -11,16 +16,16 @@
 </template>
 
 <script lang="ts">
-import { reactive, defineComponent, toRefs } from 'vue'
-import { CallData, ComponentsItem } from './Types'
+import { defineComponent } from 'vue'
+import { CallData } from './Types'
 import { DragDataType } from '../Type'
+import CanvasSet from './CanvasSet/index.vue'
+import RightMouseButton from './RightMouseButton/index.vue'
+import { components } from './Store'
 export default defineComponent({
   props: {},
+  components: { CanvasSet, RightMouseButton },
   setup() {
-    const data = reactive({})
-
-    // 画布列表区域数据
-    const components = reactive([] as ComponentsItem[])
     // 画布区域接收
     function onCanvas(CallData: CallData) {
       if (CallData.modelValue.type !== DragDataType.layout) return null
@@ -46,7 +51,6 @@ export default defineComponent({
     }
 
     return {
-      ...toRefs(data),
       onCanvas,
       components,
       onAssemblyDrop,
@@ -60,6 +64,7 @@ export default defineComponent({
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  cursor: default !important;
   /*以下为透明图效果*/
   background-image: linear-gradient(
       45deg,
