@@ -1,6 +1,12 @@
 <template>
   <float-drawer :y="50" :x="x" v-model="show" title="业务组件列表">
-    <div class="component-list">业务组件列表</div>
+    <div class="component-list">
+      <template v-for="item in ComponentList" :key="item">
+        <dht-drag :model-value="item">
+          <component :is="item"></component>
+        </dht-drag>
+      </template>
+    </div>
   </float-drawer>
 </template>
 
@@ -20,6 +26,8 @@ export default {
     const data = reactive({
       show: false,
       x: window.innerWidth - 110,
+      // 业务组件列表数据
+      ComponentList: ['dht-button'],
     })
 
     return {

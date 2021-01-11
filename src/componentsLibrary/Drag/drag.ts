@@ -6,9 +6,10 @@ type Props = {
 }
 type CallData = {
   event: DragEvent | null // 当前触发事件
-  modelValue: any
+  modelValue?: any // 绑定的数据类型
   startDom: HTMLElement | null
   endDom: HTMLElement | null
+  endData: any
 }
 type DragType = {
   startDom: HTMLElement | null
@@ -27,24 +28,35 @@ type DragType = {
     ondragstart: (e: DragEvent) => void
   }
 }
+// 一个全局的数据
+let DhtDragBindData: any = null
 
 const Drag: DragType = {
   startDom: null, // 保证开始节点和结束节点不丢失，写成这样
   endDom: null,
   dragFun: function (props: Props, ctx: SetupContext) {
     function reemit(evname: string, e: DragEvent | null = null) {
+      if (Drag.startDom === Drag.endDom) return null
+
       const redata: CallData = {
         event: e,
-        modelValue: props.modelValue,
         startDom: Drag.startDom,
         endDom: Drag.endDom,
+        modelValue: DhtDragBindData,
+        endData: props.modelValue,
       }
+
       ctx.emit(evname, redata)
     }
 
     // 当用户开始拖拽一个元素或选中的文本时触发
     function ondragstart(e: DragEvent) {
+      e.dataTransfer?.clearData()
       Drag.startDom = e.target as HTMLElement
+
+      if (!props?.modelValue) return null
+      DhtDragBindData = props.modelValue
+
       reemit('dragstart', e)
     }
 

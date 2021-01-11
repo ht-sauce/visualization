@@ -71,7 +71,7 @@
       width: 100%;
       height: 20px;
       background-color: $white;
-      background-image: linear-gradient(45deg, #c5c5c5 25%, transparent 0, transparent 75%, #c5c5c5 0, #c5c5c5), linear-gradient(45deg, #c5c5c5 25%, transparent 0, transparent 75%, #c5c5c5 0, #c5c5c5);
+      background-image: linear-gradient(45deg, $grey-90 25%, transparent 0, transparent 75%, $grey-90 0, $grey-90), linear-gradient(45deg, $grey-90 25%, transparent 0, transparent 75%, $grey-90 0, $grey-90);
       background-size: 10px 10px;
       background-position: 0 0, 5px 5px;
       .alpha-slider {

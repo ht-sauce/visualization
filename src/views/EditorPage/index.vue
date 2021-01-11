@@ -3,38 +3,28 @@
   <LayoutList />
   <ComponentList />
   <!--页面编辑区域-->
-  <div class="editor-page"></div>
+  <CanvasArea />
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import LayoutList from './LayoutList/index.vue'
 import ComponentList from './ComponentList/index.vue'
+import CanvasArea from './CanvasArea/index.vue'
+
 export default defineComponent({
   components: {
     ComponentList,
     LayoutList,
+    CanvasArea,
   },
   setup() {
-    const data = reactive({
-      show: true,
-    })
-    const open = () => {
-      console.log(1111)
-    }
-
-    return {
-      open,
-      data,
-    }
+    return {}
   },
 })
 </script>
 
 <style scoped lang="scss">
 .editor-page {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 </style>

@@ -25,10 +25,7 @@ export default defineComponent({
   emits: ['drag', 'dragend', 'dragenter', 'dragexit', 'dragleave', 'dragover', 'dragstart', 'drop'],
   props: {
     // 绑定的数据类型，因为可能很多，所以就全写上去
-    modelValue: {
-      type: [String, Number, Object, Array, Boolean, Date, Function, Symbol, Promise],
-      default: null,
-    },
+    modelValue: [String, Number, Function, Object, Array, Symbol],
     draggable: {
       type: Boolean,
       default: true,

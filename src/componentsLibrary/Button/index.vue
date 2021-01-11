@@ -1,6 +1,6 @@
 <template>
   <button class="dht-button">
-    <slot></slot>
+    <slot>按钮</slot>
   </button>
 </template>
 
