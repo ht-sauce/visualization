@@ -18,6 +18,7 @@ export default defineComponent({
     const data = reactive({
       show: false,
     })
+
     return {
       ...toRefs(data),
     }
