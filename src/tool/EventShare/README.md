@@ -1,6 +1,6 @@
 #EventShare一个事件分发函数
-当有全局监听需求的时候可以使用该类
-``
+当有全局监听需求的时候可以使用该类  
+
 代码使用示例
 
     const eventShare = new EventShare()
@@ -23,4 +23,3 @@
     eventShare.cancel('one')
     // 取消所有监听事件
     eventShare.cancel()
-``
