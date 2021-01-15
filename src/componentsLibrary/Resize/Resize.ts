@@ -82,7 +82,7 @@ const Resize = (props: Props, ctx: SetupContext) => {
     if (props.maxh) finh = finh > props.maxh ? props.maxh : finh
     if (props.maxw) finw = finw > props.maxw ? props.maxw : finw
     if (props.minh) finh = finh < props.minh ? props.minh : finh
-    if (props.minw) finw = finh < props.minw ? props.minw : finw
+    if (props.minw) finw = finw < props.minw ? props.minw : finw
 
     data.height = (finh < 0 ? 0 : finh) + 'px'
     data.width = (finw < 0 ? 0 : finw) + 'px'

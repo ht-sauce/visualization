@@ -7,7 +7,7 @@
       <dht-button @click="show = !show">颜色选择器</dht-button>
     </dht-color-picker>
 
-    <dht-resize>
+    <dht-resize :minw="100" :minh="100" :maxw="200" :maxh="200">
       <div class="drag-three">元素随意缩放实验</div>
     </dht-resize>
   </div>
