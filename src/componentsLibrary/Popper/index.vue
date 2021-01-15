@@ -1,10 +1,8 @@
 <script lang="tsx">
-import { dataType, visibility } from './types'
-import { defineComponent, onMounted, ref, reactive, onUnmounted, watch } from 'vue'
-import { createPopper } from '@popperjs/core'
-import type { Instance, Options } from '@popperjs/core'
-
+import { defineComponent, SetupContext } from 'vue'
+import Popper from './Popper'
 import ClickOutside from '../ClickOutside'
+import { Props } from './types'
 export default defineComponent({
   name: 'DhtPopper',
   emits: ['update:modelValue', 'hide', 'show'],
@@ -41,109 +39,25 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    zIndex: Number,
   },
-  setup(props, ctx) {
-    let popperInstance: Instance | null = null
-
-    const data = reactive({
-      show: 'hidden',
-    } as dataType)
-
-    // 被绑定的
-    const popper = ref<string | HTMLElement>('popper')
-    // 会移动的，这是提示内容
-    const tooltip = ref<string | HTMLElement>('tooltip')
-
-    // 合并参数
-    function mergeOptions() {
-      const opt = {
-        placement: props.placement,
-        ...(props?.options ? props.options : {}),
-      } as Options
-      const modifiers = []
-
-      modifiers.push({
-        name: 'offset',
-        options: {
-          offset: [0, props.offset],
-        },
-      })
-
-      const optModifiers = opt.modifiers ? opt.modifiers : []
-
-      opt.modifiers = [...optModifiers, ...modifiers]
-      //console.log(opt)
-      return opt
-    }
-
-    onMounted(() => {
-      if (props.disabled) return false
-
-      const popperDom = popper.value as HTMLElement
-      const tooltipDom = tooltip.value as HTMLElement
-
-      popperInstance = createPopper(popperDom, tooltipDom, mergeOptions())
-    })
-
-    onUnmounted(() => {
-      ;(popperInstance as Instance)?.destroy()
-      popperInstance = null
-    })
-
-    function hide() {
-      data.show = visibility.hidden
-      ctx.emit('update:modelValue', false)
-      ctx.emit('hide')
-    }
-
-    function show() {
-      data.show = visibility.visible
-      ctx.emit('update:modelValue', true)
-      ctx.emit('show')
-    }
-
-    // 点击事件
-    function onClick() {
-      if (props.trigger !== 'click') return null
-      if (data.show === 'hidden') show()
-      else hide()
-    }
-
-    function onMouseover() {
-      if (props.trigger !== 'hover') return null
-      show()
-    }
-
-    function onMouseout() {
-      if (props.trigger !== 'hover') return null
-      hide()
-    }
-
-    watch(
-      () => props.modelValue,
-      (e) => {
-        if (props.trigger !== 'manual') return null
-
-        if (e) show()
-        else hide()
-      },
-      {
-        immediate: true,
-      },
-    )
-
-    function clickOutside() {
-      if (props.trigger === 'hover') return
-      if (data.show === 'hidden') return
-      if (props.clickOutside) hide()
-    }
-
+  setup(props, ctx: SetupContext) {
+    const {
+      zIndex,
+      clickOutside,
+      popper,
+      onClick,
+      onMouseover,
+      onMouseout,
+      data,
+      tooltip,
+    } = Popper(props as Props, ctx)
     return () => (
       <span v-dht-click-outside={clickOutside} class="dht-popper">
         <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>
           {ctx.slots.default && ctx.slots.default()}
         </span>
-        <span class="tooltip" style={{ visibility: data.show }} ref={tooltip}>
+        <span class="tooltip" style={{ visibility: data.show, zIndex: zIndex }} ref={tooltip}>
           {props.arrow && <span class="arrow" data-popper-arrow />}
           {ctx.slots.tooltip && ctx.slots.tooltip()}
         </span>

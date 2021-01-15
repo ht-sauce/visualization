@@ -7,6 +7,7 @@
     :arrow="arrow"
     :offset="offset"
     :click-outside="clickOutside"
+    :z-index="zIndex"
   >
     <template #tooltip>
       <div class="dht-color-picker">
@@ -90,6 +91,7 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    zIndex: Number,
   },
   setup(props, ctx) {
     const data = reactive({

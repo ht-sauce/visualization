@@ -14,7 +14,7 @@ function paramsHandler(dragBox: HTMLElementCopy, binding: DirectiveBinding): REp
   dragBox.style.position = 'absolute'
   // 父元素设置
   const pdom = dragBox.parentNode as HTMLElement
-  boundary && (pdom.style.position = 'relative')
+  pdom.style.position = 'relative'
 
   // 回调函数定义
   let callback = <T>(arg: T) => {

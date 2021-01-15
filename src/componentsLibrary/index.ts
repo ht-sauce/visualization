@@ -12,6 +12,7 @@ import CalendarBase from './CalendarBase'
 import FloatWin from './FloatWin'
 import Cascade from './Cascade'
 import LineTips from './LineTips'
+import Resize from './Resize'
 // 指令类插件
 import DhtClickOutside from './ClickOutside'
 import DhtCopy from './Copy'
@@ -32,6 +33,7 @@ const component = [
   CalendarBase,
   Cascade,
   LineTips,
+  Resize,
 ]
 
 const defaultInstallOpt = {
@@ -54,4 +56,6 @@ export { install, DhtPopup, DhtColorPicker, DhtPopper, DhtDrag, DhtClickOutside 
 
 export default {
   install,
+  ...component,
+  ...plugins,
 }

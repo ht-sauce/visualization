@@ -1,0 +1,58 @@
+.dht-resize {
+  position: relative; // 这是必要的
+  .direction-base {
+    display: inline-block;
+    $dht-resize-w: 8px;
+    width: $dht-resize-w;
+    height: $dht-resize-w;
+    background: $primary-color;
+    position: absolute;
+  }
+  .top {
+    @extend .direction-base;
+    cursor: n-resize;
+    top: 0;
+    left: 49%;
+  }
+  .bottom {
+    @extend .direction-base;
+    cursor: s-resize;
+    bottom: 0;
+    left: 49%;
+  }
+  .left {
+    @extend .direction-base;
+    cursor: w-resize;
+    top: 49%;
+    left: 0;
+  }
+  .right {
+    @extend .direction-base;
+    cursor: e-resize;
+    top: 49%;
+    right: 0;
+  }
+  .top-left {
+    @extend .direction-base;
+    cursor: nw-resize;
+    top: 0;
+  }
+  .top-right {
+    @extend .direction-base;
+    cursor: ne-resize;
+    top: 0;
+    right: 0;
+  }
+  .bottom-left {
+    @extend .direction-base;
+    cursor: sw-resize;
+    left: 0;
+    bottom: 0;
+  }
+  .bottom-right {
+    @extend .direction-base;
+    cursor: se-resize;
+    right: 0;
+    bottom: 0;
+  }
+}

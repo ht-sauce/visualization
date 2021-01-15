@@ -7,7 +7,7 @@
     width: $width;
     line-height: 0;
     .fixed-color-li {
-      margin: -1px -1px 0 0 ;
+      margin: -1px -1px 0 0;
       width: 21px;
       height: 21px;
       display: inline-block;
@@ -61,7 +61,16 @@
       width: 100%;
       height: 20px;
       margin: 10px 0;
-      background: linear-gradient(to right, #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%);
+      background: linear-gradient(
+        to right,
+        #f00 0%,
+        #ff0 16.66%,
+        #0f0 33.33%,
+        #0ff 50%,
+        #00f 66.66%,
+        #f0f 83.33%,
+        #f00 100%
+      );
       .color-slider {
         @extend .slider;
       }
@@ -71,7 +80,15 @@
       width: 100%;
       height: 20px;
       background-color: $white;
-      background-image: linear-gradient(45deg, $grey-90 25%, transparent 0, transparent 75%, $grey-90 0, $grey-90), linear-gradient(45deg, $grey-90 25%, transparent 0, transparent 75%, $grey-90 0, $grey-90);
+      background-image: linear-gradient(
+          45deg,
+          $grey-90 25%,
+          transparent 0,
+          transparent 75%,
+          $grey-90 0,
+          $grey-90
+        ),
+        linear-gradient(45deg, $grey-90 25%, transparent 0, transparent 75%, $grey-90 0, $grey-90);
       background-size: 10px 10px;
       background-position: 0 0, 5px 5px;
       .alpha-slider {
