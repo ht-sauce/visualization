@@ -29,6 +29,7 @@ interface Props {
   minw: number
   minh: number
   callback: <T>(args: T) => void
+  callstop: () => void
 }
 
 export { CallData, Callback, Direction, DataType, Props }

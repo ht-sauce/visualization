@@ -92,6 +92,7 @@ const Resize = (props: Props, ctx: SetupContext) => {
   // 移动结束
   function onStop() {
     isMove = false
+    props.callstop()
   }
 
   return {

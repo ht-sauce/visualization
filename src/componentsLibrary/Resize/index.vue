@@ -20,6 +20,12 @@ export default defineComponent({
         return {}
       },
     },
+    callstop: {
+      type: Function,
+      default: () => {
+        return {}
+      },
+    },
   },
   setup(props, ctx) {
     const { data, rootDom, dcCallback, setDirection, onStop } = Resize(props as Props, ctx)
