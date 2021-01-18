@@ -15,13 +15,15 @@
 
 <script lang="tsx">
 import { defineComponent, toRefs, reactive } from 'vue'
+import Ajax from '@/services/ajax/ajax'
+import Concurrent from '@/tool/Concurrent'
 export default defineComponent({
   components: {},
   setup(props, ctx) {
     const data = reactive({
       show: false,
     })
-
+    const ajax = new Ajax()
     return {
       ...toRefs(data),
     }
