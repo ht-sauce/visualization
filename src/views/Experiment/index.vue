@@ -24,6 +24,11 @@ export default defineComponent({
       show: false,
     })
     const ajax = new Ajax()
+    const one = (url: string) => {
+      ajax.request({
+        url,
+      })
+    }
     return {
       ...toRefs(data),
     }

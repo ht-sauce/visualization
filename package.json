@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "buildcom": "vue-cli-service build --target wc-async --name foo 'src/componentsLibrary/Copy/index.ts'",
     "lint": "vue-cli-service lint",
     "tsbulid": "tsc"
   },
