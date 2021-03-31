@@ -13,6 +13,7 @@ import FloatWin from './FloatWin'
 import Cascade from './Cascade'
 import LineTips from './LineTips'
 import Resize from './Resize'
+import ReachBottom from './ReachBottom'
 // 指令类插件
 import DhtClickOutside from './ClickOutside'
 import DhtCopy from './Copy'
@@ -34,6 +35,7 @@ const component = [
   Cascade,
   LineTips,
   Resize,
+  ReachBottom,
 ]
 
 const defaultInstallOpt = {
