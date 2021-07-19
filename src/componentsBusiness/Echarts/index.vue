@@ -1,28 +1,33 @@
 <script lang="tsx">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const echarts = require('echarts')
+import { ref, onMounted, onUnmounted, watch, SetupContext, PropType } from 'vue'
+import echarts from 'echarts'
+import { EChartsType, SetOptionOpts } from 'echarts/types/dist/echarts'
+
+type Props = {
+  option: SetOptionOpts
+}
+
 export default {
   // dom：echarts的dom数据，echarts：实例
   emits: ['dom', 'echarts'],
   props: {
     option: {
-      type: Object,
+      type: Object as PropType<SetOptionOpts>,
       default: () => {
         return {}
       },
     },
   },
-  setup(props, ctx) {
-    let myChart = null // echarts实例
-    const echartsdom = ref('echartsdom')
+  setup(props: Props, ctx: SetupContext) {
+    let myChart: EChartsType | null = null // echarts实例
+    const echartsdom = ref<string | HTMLElement>('echartsdom')
     // 判断获取dom
-    function getDom(ecref) {
-      let setint = null
+    function getDom(ecref: typeof echartsdom) {
+      let setint: number
       return new Promise((resolve, reject) => {
         clearInterval(setint)
         setint = setInterval(() => {
-          const dom = ecref.value
+          const dom = ecref.value as HTMLElement
           if (dom && typeof ecref.value === 'object') {
             clearInterval(setint)
             ctx.emit('dom', dom)
@@ -34,7 +39,7 @@ export default {
 
     async function renderEcharts() {
       const dom = await getDom(echartsdom)
-      myChart = echarts.init(dom)
+      myChart = echarts.init(dom as HTMLElement)
       setOption()
       ctx.emit('echarts', myChart)
     }
@@ -81,11 +86,11 @@ export default {
 
     onUnmounted(() => {
       window.removeEventListener('resize', resizeEcharts)
-      myChart.clear()
+      ;(myChart as EChartsType).clear()
       myChart = null
     })
 
-    return () => <div className="gl-echarts" ref={echartsdom} />
+    return () => <div class="gl-echarts" ref={echartsdom} />
   },
 }
 </script>

@@ -42,16 +42,8 @@ export default defineComponent({
     zIndex: Number,
   },
   setup(props, ctx: SetupContext) {
-    const {
-      zIndex,
-      clickOutside,
-      popper,
-      onClick,
-      onMouseover,
-      onMouseout,
-      data,
-      tooltip,
-    } = Popper(props as Props, ctx)
+    const { zIndex, clickOutside, popper, onClick, onMouseover, onMouseout, data, tooltip } =
+      Popper(props as Props, ctx)
     return () => (
       <span v-dht-click-outside={clickOutside} class="dht-popper">
         <span ref={popper} onClick={onClick} onMouseover={onMouseover} onMouseout={onMouseout}>

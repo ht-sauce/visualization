@@ -45,7 +45,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, form) => {
-  document.title = to.meta.title
+  document.title = to.meta.title as string
 })
 
 export default router

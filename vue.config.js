@@ -14,7 +14,6 @@ const vueConfig = {
     },
   },
   css: {
-    requireModuleExtension: true,
     loaderOptions: {
       scss: {
         additionalData: `@import '~@/styles/variables.scss';`,
