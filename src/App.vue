@@ -2,6 +2,15 @@
   <router-view />
 </template>
 
+<script type="tsx">
+import { defineComponent} from 'vue'
+import DhtBuryingPoint from '@/DhtBuryingPoint'
+export default defineComponent({
+  setup() {
+    new DhtBuryingPoint()
+  }
+})
+</script>
 <style lang="scss">
 #app {
   width: 100%;
