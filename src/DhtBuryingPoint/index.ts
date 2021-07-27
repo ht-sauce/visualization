@@ -1,14 +1,14 @@
-import { InitOpt, defaultData } from './Types'
-import { getGeolocation } from './Tool'
+import { InitOpt, DefaultData } from './Types'
+import { getUuid } from './Tool'
 export default class DhtBuryingPoint {
+  uuid: string = ''
   constructor(opt: InitOpt) {
-    console.log(window.screen)
+    this.uuid = getUuid()
   }
   // 获取默认系统自带数据
-  private async getDefaultData() {
-    const { language, userAgent } = navigator
-    const defaultData = {
-      language,
+  private getDefaultData(): DefaultData {
+    const { userAgent } = navigator
+    const defaultData: DefaultData = {
       userAgent,
       timestamp: new Date().getTime(),
       url: window.location.href,
@@ -16,9 +16,14 @@ export default class DhtBuryingPoint {
         width: window.screen.width,
         height: window.screen.height,
       },
-    } as defaultData
+      os: userAgent,
+      userId: 1231,
+      uuid: this.uuid,
+    }
 
     // this.defaultData.geolocation = await getGeolocation()
+
+    return defaultData
   }
   // 内部发送数据
   private send(SendData: any) {

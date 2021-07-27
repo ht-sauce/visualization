@@ -1,4 +1,5 @@
-import { geolocation } from '../Types/'
+import { geolocation } from '../Types'
+import { v4 as uuidv4 } from 'uuid'
 
 // 获取地理位置
 export function getGeolocation(): Promise<geolocation> {
@@ -23,3 +24,5 @@ export function getGeolocation(): Promise<geolocation> {
     )
   })
 }
+
+export const getUuid = () => uuidv4()
