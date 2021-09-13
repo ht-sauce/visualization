@@ -37,6 +37,14 @@ const routes: Array<RouteRecordRaw> = [
       title: '页面编辑器',
     },
   },
+  {
+    path: '/ast-test',
+    name: '/ast-test',
+    component: () => import('@/views/Ast/index.vue'),
+    meta: {
+      title: 'ast测试工具',
+    },
+  },
 ]
 
 const router = createRouter({
