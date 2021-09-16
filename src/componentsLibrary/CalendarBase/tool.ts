@@ -7,8 +7,7 @@ class CalendarTool {
   }
   // 这天周几
   getWeekSeveral({ year, month, day }: YMD): number {
-    const date = new Date()
-    date.setFullYear(year, month, day)
+    const date = new Date(`${year},${month},${day}`)
     const Several = date.getDay()
     if (Several === 0) return 7
     else return Several
