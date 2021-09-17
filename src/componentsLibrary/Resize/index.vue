@@ -1,7 +1,8 @@
+<!--suppress CheckTagEmptyBody -->
 <script lang="tsx">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import DhtDc from './DirectionCommand'
-import { Direction } from './Type'
+import { Direction, PropsCallback, PropsCallstop } from './Type'
 import Resize from './Resize'
 import { Props } from './Type'
 export default defineComponent({
@@ -15,13 +16,13 @@ export default defineComponent({
     minw: Number,
     minh: Number,
     callback: {
-      type: Function,
+      type: Function as PropType<PropsCallback>,
       default: () => {
         return {}
       },
     },
     callstop: {
-      type: Function,
+      type: Function as PropType<PropsCallstop>,
       default: () => {
         return {}
       },

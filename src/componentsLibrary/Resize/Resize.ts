@@ -1,5 +1,5 @@
 import { reactive, SetupContext, ref } from 'vue'
-import { CallData, Direction, Props } from './Type'
+import { CallData, Direction, Props, CallArgs } from './Type'
 
 const Resize = (props: Props, ctx: SetupContext) => {
   const data = reactive({
@@ -87,7 +87,7 @@ const Resize = (props: Props, ctx: SetupContext) => {
     data.height = (finh < 0 ? 0 : finh) + 'px'
     data.width = (finw < 0 ? 0 : finw) + 'px'
 
-    props.callback({ width: finw, height: finh, mx: nx, my: ny })
+    props.callback({ width: finw, height: finh, mx: nx, my: ny } as CallArgs)
   }
   // 移动结束
   function onStop() {

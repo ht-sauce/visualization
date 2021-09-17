@@ -23,13 +23,23 @@ interface DataType {
   direction: Direction
 }
 
+interface CallArgs {
+  width: number
+  height: number
+  mx: number
+  my: number
+}
+
+type PropsCallback = (args: CallArgs) => void
+type PropsCallstop = () => void
+
 interface Props {
   maxw: number
   maxh: number
   minw: number
   minh: number
-  callback: <T>(args: T) => void
-  callstop: () => void
+  callback: PropsCallback
+  callstop: PropsCallstop
 }
 
-export { CallData, Callback, Direction, DataType, Props }
+export { CallData, Callback, Direction, DataType, Props, CallArgs, PropsCallback, PropsCallstop }

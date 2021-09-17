@@ -1,8 +1,9 @@
 <script lang="tsx">
-import { defineComponent, SetupContext } from 'vue'
+import { defineComponent, SetupContext, PropType } from 'vue'
 import Popper from './Popper'
 import ClickOutside from '../ClickOutside'
 import { Props } from './types'
+import { Options } from '@popperjs/core'
 export default defineComponent({
   name: 'DhtPopper',
   emits: ['update:modelValue', 'hide', 'show'],
@@ -32,8 +33,8 @@ export default defineComponent({
       default: 'bottom',
     },
     options: {
-      type: Object,
-      default: () => null, // 出现ts问题参考：https://github.com/vuejs/vue-next/issues/2474
+      type: Object as PropType<Options>,
+      default: () => null,
     },
     clickOutside: {
       type: Boolean,
