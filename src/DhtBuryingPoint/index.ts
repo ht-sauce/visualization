@@ -1,7 +1,7 @@
 import { InitOpt, DefaultData } from './Types'
 import { getUuid } from './Tool'
 export default class DhtBuryingPoint {
-  uuid: string = ''
+  uuid = ''
   constructor(opt: InitOpt) {
     this.uuid = getUuid()
   }

@@ -24,7 +24,7 @@ export default {
     modelValue: Boolean,
     title: String,
   },
-  setup(props, ctx) {
+  setup() {
     const data = reactive({
       show: false,
       x: window.innerWidth - 110,

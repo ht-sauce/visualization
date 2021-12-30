@@ -46,14 +46,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, ref } from 'vue'
-import { ComponentInternalInstance } from '@vue/runtime-core'
-import style from '@/styles/variables.scss' // 需要支持css modules
+import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'Home',
   components: {},
   setup() {
-    const self = getCurrentInstance() as ComponentInternalInstance
     const colorCard = ref(new Array(10)).value
 
     const border = ref(new Array(3)).value

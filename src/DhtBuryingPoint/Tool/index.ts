@@ -18,7 +18,7 @@ export function getGeolocation(): Promise<geolocation> {
         const { latitude, longitude } = suc.coords ?? {}
         resolve({ latitude, longitude })
       },
-      (err) => {
+      () => {
         reject(nolg)
       },
     )

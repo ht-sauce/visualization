@@ -116,7 +116,7 @@ export default defineComponent({
       () => `rgba(${rgb.value.r}, ${rgb.value.g}, ${rgb.value.b}, ${data.alphax / 100})`,
     )
     // 确认颜色
-    function confirmColor(color: string) {
+    function confirmColor() {
       // const colors = data.fixedColors
       // colors.unshift(hex.value)
       // data.fixedColors = colors.slice(0, 36)

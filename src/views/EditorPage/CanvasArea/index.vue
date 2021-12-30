@@ -40,7 +40,7 @@ export default defineComponent({
       if (CallData.modelValue.type !== DragDataType.canvas) return null
 
       const bindData = CallData.modelValue
-      const startIndex: number = Number(bindData.data)
+      const startIndex = Number(bindData.data)
       const startItem = components[startIndex]
 
       const endIndex = Number(CallData.endData.data)

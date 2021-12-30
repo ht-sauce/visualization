@@ -76,8 +76,10 @@ class Ajax {
     const { url, method, timeout, header, type } = this.config(config)
 
     let xhr: XMLHttpRequest
-    if (window.XMLHttpRequest) xhr = new XMLHttpRequest()
-    this._xhr = xhr!
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest()
+      this._xhr = xhr
+    }
 
     // 返回promise对象
     return new Promise((resolve, reject) => {

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { ref, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'DhtReachBottom',

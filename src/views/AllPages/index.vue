@@ -9,12 +9,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   setup() {
-    const self = getCurrentInstance()
-    const route = useRoute()
     const router = useRouter()
 
     let routers = ref(router.options.routes).value
