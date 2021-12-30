@@ -1,0 +1,10 @@
+{
+  "name": "vientiane",
+  "version": "1.0.0",
+  "description": "pc端监控js",
+  "main": "./dist/index.js",
+  "scripts": {
+  },
+  "author": "ht-sauce",
+  "devDependencies": {}
+}

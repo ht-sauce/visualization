@@ -16,9 +16,11 @@
 
 <script lang="tsx">
 import { defineComponent, toRefs, reactive } from 'vue'
+import vientiane from 'vientiane'
 export default defineComponent({
   components: {},
   setup() {
+    console.log(vientiane)
     const data = reactive({
       show: false,
     })
