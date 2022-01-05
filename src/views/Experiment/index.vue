@@ -11,21 +11,28 @@
     <dht-resize :minw="100" :minh="100" :maxw="200" :maxh="200">
       <div class="drag-three">元素随意缩放实验</div>
     </dht-resize>
+
+    <dht-button @click="testAjax">测试按钮</dht-button>
   </div>
 </template>
 
-<script lang="tsx">
+<script>
 import { defineComponent, toRefs, reactive } from 'vue'
-import vientiane from 'vientiane'
+
 export default defineComponent({
   components: {},
   setup() {
-    console.log(vientiane)
     const data = reactive({
       show: false,
     })
+
+    async function testAjax() {
+      //
+    }
+
     return {
       ...toRefs(data),
+      testAjax,
     }
   },
 })

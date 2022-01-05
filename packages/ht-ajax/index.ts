@@ -5,7 +5,7 @@ interface Headers {
 interface Config {
   prefix?: string // 前缀
   url?: string // 路径
-  data?: object // 传入的参数
+  data?: any // 传入的参数
   method?: string
   splicing?: boolean // 当get请求下是否拼接data数据
   timeout?: number
@@ -19,7 +19,7 @@ class Ajax {
     this._xhr = {} as XMLHttpRequest
   }
   // 终止接口请求
-  abort() {
+  public abort() {
     this._xhr && this._xhr.abort()
   }
   // get情况下需要拼接字符格式
@@ -62,7 +62,7 @@ class Ajax {
     return config
   }
   // image请求方式
-  image(config: Config): void {
+  public image(config: Config): void {
     const setting: Config = this.config(config)
 
     let image: HTMLImageElement | null
@@ -72,7 +72,7 @@ class Ajax {
     image = null // 清空内存
   }
   // xhr请求方式
-  request(config: Config): Promise<any> {
+  public request(config: Config): Promise<any> {
     const { url, method, timeout, header, type } = this.config(config)
 
     let xhr: XMLHttpRequest
@@ -126,12 +126,12 @@ class Ajax {
         xhr.setRequestHeader(key, header[key])
       }
 
-      xhr.send(config.data as Document)
+      xhr.send(config.data)
       xhr.timeout = timeout as number
     })
   }
   // 新一代fetch方式，考虑之后不做逻辑封装，业务封装更直接
-  fetch(config: Config) {
+  public fetch(config: Config) {
     const { url, method, timeout, header, data, type } = this.config(config)
 
     let setTimeInt: number
