@@ -5,7 +5,7 @@ interface Headers {
 interface Config {
   prefix?: string // 前缀
   url?: string // 路径
-  data?: any // 传入的参数
+  data?: object // 传入的参数
   method?: string
   splicing?: boolean // 当get请求下是否拼接data数据
   timeout?: number
@@ -126,7 +126,7 @@ class Ajax {
         xhr.setRequestHeader(key, header[key])
       }
 
-      xhr.send(null)
+      xhr.send(config.data as Document)
       xhr.timeout = timeout as number
     })
   }
