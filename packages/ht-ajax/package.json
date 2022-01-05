@@ -2,7 +2,7 @@
   "name": "ht-ajax",
   "version": "1.0.0",
   "description": "接口服务",
-  "main": "./ajax.ts",
+  "main": "./index.ts",
   "scripts": {
   },
   "author": "ht-sauce",
