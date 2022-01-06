@@ -10,18 +10,19 @@ export function reportXHR(data: object) {
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
   xhr.responseType = 'json'
   xhr.timeout = 10000 // 10秒
-  xhr.open('POST', config.url, false)
-  xhr.send(data as Document)
+  xhr.open('POST', config.url as string, false)
+  xhr.send(JSON.stringify(data))
 }
 
+// 自动选择上报方式
 const sendBeacon = (data: object) => {
   if (isSupportSendBeacon()) {
-    window.navigator.sendBeacon(config.url, JSON.stringify(data))
+    window.navigator.sendBeacon(config.url as string, JSON.stringify(data))
   } else {
     reportXHR(data)
   }
 }
-
+// 上报函数
 export function report(data: object, isImmediate = false) {
   if (!config.url) {
     console.error('请设置上传 url 地址')
@@ -55,7 +56,7 @@ export function lazyReportCache(data: object, timeout = 3000) {
   clearTimeout(timer)
   timer = setTimeout(() => {
     const data = getCache()
-    if (data.length) {
+    if (data.length > 0) {
       report(data)
       clearCache()
     }

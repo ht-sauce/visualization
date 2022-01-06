@@ -1,4 +1,5 @@
 <template>
+  <dht-button @click="testAjax">测试按钮</dht-button>
   <div class="experiment">
     <dht-float-win>
       <div class="drag-one">上下左右自动贴边组件</div>
@@ -11,14 +12,12 @@
     <dht-resize :minw="100" :minh="100" :maxw="200" :maxh="200">
       <div class="drag-three">元素随意缩放实验</div>
     </dht-resize>
-
-    <dht-button @click="testAjax">测试按钮</dht-button>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, toRefs, reactive } from 'vue'
-
+import vientiane from 'vientiane'
 export default defineComponent({
   components: {},
   setup() {
@@ -27,7 +26,10 @@ export default defineComponent({
     })
 
     async function testAjax() {
-      //
+      vientiane.start({
+        appid: '',
+        userid: '',
+      })
     }
 
     return {

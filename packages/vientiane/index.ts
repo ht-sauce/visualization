@@ -1,8 +1,10 @@
 import { setConfig, Config } from './config'
+import { parseNavigator } from './base/browser'
 
 const Vientiane = {
-  start(config: Config) {
-    setConfig(config)
+  start(con: Config) {
+    setConfig(con)
+    parseNavigator()
   },
 }
 

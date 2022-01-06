@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "pc端监控js",
   "main": "./dist/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "ht-sauce",
-  "devDependencies": {}
+  "dependencies": {
+    "bowser": "^2.11.0"
+  }
 }

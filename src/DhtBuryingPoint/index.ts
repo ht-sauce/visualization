@@ -2,7 +2,7 @@ import { InitOpt, DefaultData } from './Types'
 import { getUuid } from './Tool'
 export default class DhtBuryingPoint {
   uuid = ''
-  constructor(opt: InitOpt) {
+  constructor(opt?: InitOpt) {
     this.uuid = getUuid()
   }
   // 获取默认系统自带数据
