@@ -1,14 +1,20 @@
 import generateUid from './utils/generateUid'
+
+// 平台类型，初始由前端定义，后端需要存储枚举值
+export enum AppType {
+  pc = 'pc', // 电脑端
+  wechatApplet = 'wechat-applet', // 微信小程序
+  alipayApplet = 'alipay-applet', // 支付宝小程序
+}
+
 type Config = {
   [key: string]: undefined | string | number | object | []
   sign?: string
   uid?: string // 当前埋点的标志
-  language?: string
-  userAgent?: string
-  timeZoneOffset?: number // 获取时间戳偏移量,分钟
-  userAgentParse?: object
   url?: string // 上报地址
-  appid?: number | string // 平台标志
+  appid?: string // 平台标志
+  appType?: string
+  SonType?: string
   userid?: number | string // 用户标识
 }
 
@@ -17,19 +23,21 @@ const config: Config = {
 
   url: '',
 
-  language: '',
-  userAgent: '',
-  userAgentParse: {}, // 二次解析的useragent
-  // 默认为-480,代表中国大部分区域，也可以通过时区差值分钟推算时区和地区
-  timeZoneOffset: -480,
   uid: generateUid(),
-  appid: 0,
+  appid: '',
   userid: 0,
+  appType: AppType.pc,
 }
-// 当前唯一标识
-const sign = config.sign + '-uid'
-if (localStorage.getItem(sign)) {
-  config.uid = localStorage.getItem(sign) as string
+
+// 生成缓存uid
+export function generateStorageUid() {
+  const sign = config.sign + '-uid'
+  if (localStorage.getItem(sign)) {
+    config.uid = localStorage.getItem(sign) as string
+  } else {
+    config.uid = generateUid()
+    localStorage.setItem(sign, config.uid)
+  }
 }
 
 function setConfig(options: Config): void {

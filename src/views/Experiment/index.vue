@@ -25,11 +25,12 @@ export default defineComponent({
       show: false,
     })
 
+    vientiane.start({
+      appid: 'dht',
+      userid: 'dht',
+    })
     async function testAjax() {
-      vientiane.start({
-        appid: '',
-        userid: '',
-      })
+      const aaaa = 1
     }
 
     return {

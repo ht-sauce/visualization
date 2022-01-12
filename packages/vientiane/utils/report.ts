@@ -1,13 +1,13 @@
-import { addCache, getCache, clearCache } from './cache'
-import { config } from '../config'
+import { addCache, getCache, clearCache, baseData } from './cache'
+import { config, Config } from '../config'
 
 export function isSupportSendBeacon() {
   return !!window.navigator?.sendBeacon
 }
 
-export function reportXHR(data: object) {
+export function reportXHR(data: object | Config) {
   const xhr = new XMLHttpRequest()
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+  xhr.setRequestHeader('Content-Type', 'text/plain')
   xhr.responseType = 'json'
   xhr.timeout = 10000 // 10秒
   xhr.open('POST', config.url as string, false)
@@ -15,7 +15,7 @@ export function reportXHR(data: object) {
 }
 
 // 自动选择上报方式
-const sendBeacon = (data: object) => {
+const sendBeacon = (data: object | Config) => {
   if (isSupportSendBeacon()) {
     window.navigator.sendBeacon(config.url as string, JSON.stringify(data))
   } else {
@@ -23,10 +23,12 @@ const sendBeacon = (data: object) => {
   }
 }
 // 上报函数
-export function report(data: object, isImmediate = false) {
+export function report(data: object | Config, isImmediate = false) {
+  console.log('打印上报信息', data)
   if (!config.url) {
-    console.error('请设置上传 url 地址')
+    console.log('请设置上传 url 地址')
   }
+  data = baseData(data)
 
   if (isImmediate) {
     sendBeacon(data)
@@ -50,7 +52,7 @@ export function report(data: object, isImmediate = false) {
 
 // 延时上报
 let timer: number
-export function lazyReportCache(data: object, timeout = 3000) {
+export function lazyReportCache(data: Config, timeout = 3000) {
   addCache(data)
 
   clearTimeout(timer)
