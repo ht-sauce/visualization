@@ -20,6 +20,12 @@ const vueConfig = {
       },
     },
   },
+  configureWebpack: {
+    experiments: {
+      outputModule: true,
+    },
+    externalsType: 'module',
+  },
 }
 
 module.exports = vueConfig

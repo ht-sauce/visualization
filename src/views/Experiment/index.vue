@@ -18,9 +18,20 @@
 <script lang="ts">
 import { defineComponent, toRefs, reactive } from 'vue'
 import vientiane from 'vientiane'
+// import test from 'http://localhost:8080/test/test.js'
+import HtAjax from 'ht-ajax'
 export default defineComponent({
   components: {},
   setup() {
+    const htAjax = new HtAjax()
+    htAjax
+      .request({
+        type: 'text',
+        url: 'http://localhost:8080/test/test.js',
+      })
+      .then((e) => {
+        console.log(11, e)
+      })
     const data = reactive({
       show: false,
     })
