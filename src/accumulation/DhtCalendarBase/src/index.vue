@@ -115,6 +115,23 @@ export default {
         return this.formatDate(li)
       })
     },
+    // 通过年月日得出需要传递给禁用函数的数据结构
+    // @formatDate = '2021-09-11'
+    formatDisableDate(formatDate = '') {
+      const year = Number(formatDate.substring(0, 4))
+      const month = Number(formatDate.substring(5, 7))
+      const day = Number(formatDate.substring(8, 11))
+
+      return {
+        formatDate,
+        today: CalendarTool.getToday().formatDate === formatDate,
+        year,
+        month,
+        day,
+        timestamp: new Date(`${year},${month},${day}`).getTime(), // 时间戳
+        week: CalendarTool.getWeekSeveral({ year, month, day }),
+      }
+    },
     formatDate(e) {
       let month = this.month
       let year = this.year
@@ -207,7 +224,6 @@ export default {
     height: $height;
   }
   .disabled-day {
-    // background: var(--text-color-placeholder);
     cursor: not-allowed;
     color: var(--text-color-secondary);
     &:hover {

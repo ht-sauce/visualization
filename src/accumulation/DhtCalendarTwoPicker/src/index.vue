@@ -2,6 +2,7 @@
   <div>
     <div class="dht-calendar-two-picker">
       <dht-calendar-base
+        ref="leftCalendar"
         class="calendar calendar-left"
         :year="showYear"
         :value="value"
@@ -28,7 +29,7 @@
           </div>
         </template>
         <template #default="{ li }">
-          <div class="two-day">{{ li.day }}</div>
+          <ShowDay :li="li" :first-last-date="firstLastDate" />
         </template>
       </dht-calendar-base>
       <dht-calendar-base
@@ -58,7 +59,7 @@
           </div>
         </template>
         <template #default="{ li }">
-          <div class="two-day">{{ li.day }}</div>
+          <ShowDay :li="li" :first-last-date="firstLastDate" />
         </template>
       </dht-calendar-base>
     </div>
@@ -73,12 +74,14 @@
 import DhtCalendarBase from '@/components/DhtCalendarBase'
 import CalendarTool from '@/components/DhtCalendarBase/src/tool'
 import { intervalDate } from './tool'
+import ShowDay from './ShowDay.vue'
 export default {
   name: 'DhtCalendarTwoPicker',
   // 双月时间返回事件
   emits: ['twoDate', 'input', 'change'],
   components: {
     DhtCalendarBase,
+    ShowDay,
   },
   props: {
     // radio:单个点击，continuous：按住Ctrl，可快速选择连续的日期区间，点击选择起-止日期即可
@@ -255,10 +258,10 @@ export default {
     changeContinuous(dayLi) {
       // 已选日期
       this.firstLastDate.push(dayLi)
-      if (this.firstLastDate.length === 2) this.DateInSelectedRange(dayLi)
+      if (this.firstLastDate.length === 2) this.DateInSelectedRange()
     },
     // 选中范围内日期
-    DateInSelectedRange(dayLi) {
+    DateInSelectedRange() {
       const checkList = [...this.value]
       // 日期从小到大排列
       const firstLastDate = this.firstLastDate.sort((li, li2) => {
@@ -271,13 +274,18 @@ export default {
       const newCheckList = []
       diffDate.forEach((date) => {
         const { formatDate } = date
-        if (!this.disabledDate(dayLi) && !checkList.includes(formatDate)) {
+        if (
+          !this.disabledDate(this.$refs.leftCalendar.formatDisableDate(formatDate)) &&
+          !checkList.includes(formatDate)
+        ) {
           newCheckList.push(formatDate)
         }
       })
 
       this.reVModel([...checkList, ...newCheckList])
-      this.firstLastDate = []
+      setTimeout(() => {
+        this.firstLastDate = []
+      }, 300)
     },
     // 按键监听
     keyMonitor(event) {
@@ -341,14 +349,6 @@ export default {
   }
   .icon-right-small {
     right: 30px;
-  }
-  // 快速选择模式下
-  .two-day {
-    width: inherit;
-    height: inherit;
-    box-sizing: border-box;
-    border-bottom: #ffffff 1px solid;
-    border-right: #ffffff 1px solid;
   }
 }
 </style>
