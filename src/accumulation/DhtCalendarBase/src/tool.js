@@ -5,6 +5,24 @@ class CalendarTool {
     const date = new Date(year, month, 0)
     return date.getDate()
   }
+  // 转年月日,type: 1时间戳，2yyyy-mm-dd
+  toYMD(time, type = 1) {
+    if (type === 1) {
+      const date = new Date(time)
+      return {
+        y: date.getFullYear(),
+        m: date.getMonth() + 1,
+        d: date.getDate(),
+      }
+    }
+    if (type === 2) {
+      return {
+        y: Number(time.substring(0, 4)),
+        m: Number(time.substring(5, 7)),
+        d: Number(time.substring(8, 11)),
+      }
+    }
+  }
   // 这天周几
   getWeekSeveral({ year, month, day }) {
     const date = new Date(`${year},${month},${day}`)
