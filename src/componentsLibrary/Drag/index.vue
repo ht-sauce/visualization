@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import drag from './drag'
-import { SetupContext } from '@vue/runtime-core'
+import { SetupContext } from 'vue'
 export default defineComponent({
   name: 'DhtDrag',
   emits: ['drag', 'dragend', 'dragenter', 'dragexit', 'dragleave', 'dragover', 'dragstart', 'drop'],

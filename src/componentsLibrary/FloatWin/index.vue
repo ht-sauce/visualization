@@ -3,7 +3,7 @@ import { defineComponent, getCurrentInstance, PropType, reactive } from 'vue'
 import DhtMove from '../Move'
 import { VmoveCallData } from '../Move/types'
 import { DirectionEnum } from './Types'
-import { ComponentInternalInstance } from '@vue/runtime-core'
+import { ComponentInternalInstance } from 'vue'
 
 interface CallData extends VmoveCallData {
   direction?: DirectionEnum

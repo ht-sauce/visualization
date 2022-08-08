@@ -1,5 +1,4 @@
 import { getCurrentInstance, withScopeId } from 'vue'
-import { ComponentInternalInstance } from '@vue/runtime-core'
 
 // jsx使用scopedid
 export function withScoped() {

@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "接口服务",
   "main": "./index.ts",
-  "scripts": {
-  },
-  "author": "ht-sauce",
-  "devDependencies": {}
+  "scripts": {},
+  "author": "ht-sauce"
 }
